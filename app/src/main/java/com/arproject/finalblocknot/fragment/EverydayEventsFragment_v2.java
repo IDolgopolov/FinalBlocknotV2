@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.util.TimingLogger;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +35,6 @@ public class EverydayEventsFragment_v2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        long startTime = System.currentTimeMillis();
 
         grid = (GridLayout) inflater.inflate(R.layout.everyday_fragment_v2, null);
         for (int i = 0; i < grid.getChildCount(); i++) {
@@ -54,12 +51,8 @@ public class EverydayEventsFragment_v2 extends Fragment {
             }
         }
         grid.removeAllViews();
-        Log.i("timeCount", System.currentTimeMillis() - startTime + "");
-        startTime = System.currentTimeMillis();
 
         setDate();
-        Log.i("timeCount", System.currentTimeMillis() - startTime + "");
-        startTime = System.currentTimeMillis();
 
         for(int i = 0; i < arrayEditText.size(); i++) {
 
@@ -70,11 +63,8 @@ public class EverydayEventsFragment_v2 extends Fragment {
             final String date = arrayDateTextView.get(tableNumber).getText().toString();
             String information = MainActivity.getEDInformation(date, idPosition);
 
-            if(information != null) {
-                editText.setText(information);
-            } /* else {
-                MainActivity.addEDInDB("while null", date, idPosition);
-            } */
+            if(information != null) editText.setText(information);
+
 
             editText.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -100,8 +90,6 @@ public class EverydayEventsFragment_v2 extends Fragment {
             });
 
         }
-        Log.i("timeCount", System.currentTimeMillis() - startTime + "");
-        startTime = System.currentTimeMillis();
 
         GridLayout gridFragment = new GridLayout(getContext());
         gridFragment.setColumnCount(2);
@@ -110,8 +98,6 @@ public class EverydayEventsFragment_v2 extends Fragment {
         for(int i = 0; i < arrayTable.size(); i++) {
             gridFragment.addView(arrayTable.get(i));
         }
-        Log.i("timeCount", System.currentTimeMillis() - startTime + "");
-        startTime = System.currentTimeMillis();
 
         return gridFragment;
     }
@@ -137,7 +123,7 @@ public class EverydayEventsFragment_v2 extends Fragment {
                     currentMonth++;
                 }
             }
-            dateToday = "date: "  + Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
+            dateToday = Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
                     + "." + Integer.toString(currentYear);
             arrayDateTextView.get(i).setText(dateToday);
         }

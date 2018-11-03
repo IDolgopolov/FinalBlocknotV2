@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -42,11 +43,14 @@ public class MainActivity extends AppCompatActivity  {
     public final static String TAG_EDITING_EVENT = "dialog_for_editing";
     private int displayHeight, displayWidth;
     private FloatingActionButton buttonDeleteAll;
+    private boolean generateEEFV2 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         Display display = getWindowManager().getDefaultDisplay();
         Point pointSize = new Point();
@@ -54,12 +58,12 @@ public class MainActivity extends AppCompatActivity  {
         displayHeight = pointSize.y;
         displayWidth = pointSize.x;
 
-        int heightForEE = (int) Math.round(displayHeight * 0.4);
-        LinearLayout layoutEE = findViewById(R.id.layout_for_recycler_view);
-        RelativeLayout.LayoutParams paramsEE = (RelativeLayout.LayoutParams) layoutEE.getLayoutParams();
-        paramsEE.height = heightForEE;
-        paramsEE.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        layoutEE.setLayoutParams(paramsEE);
+        int heightForRE = (int) Math.round(displayHeight * 0.4);
+        LinearLayout layoutRE = findViewById(R.id.layout_for_recycler_view);
+        RelativeLayout.LayoutParams paramsRE = (RelativeLayout.LayoutParams) layoutRE.getLayoutParams();
+        paramsRE.height = heightForRE;
+        paramsRE.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        layoutRE.setLayoutParams(paramsRE);
 
         db = new DBHelper(getApplicationContext());
         dbED = new DBEDHelper(getApplicationContext());
@@ -86,39 +90,33 @@ public class MainActivity extends AppCompatActivity  {
         });
 
         fragmentRandomEvents = new RandomEventsFragment();
-        //fragmentEverydayEvents = new EverydayEventsFragment_v2();
 
 
 
         final FragmentTransaction fragmentTransaction = sFragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.layout_for_recycler_view, (Fragment) fragmentRandomEvents);
-        //fragmentTransaction.add(R.id.layout_for_everyday_events, (Fragment) fragmentEverydayEvents);
         fragmentTransaction.commit();
-
-
-        Log.i("thread", "tread_one");
-
+        generateEEFV2 = true;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
-        executor.schedule(
-               new Runnable() {
-                    @Override
-                    public void run() {
-                        FragmentTransaction fT = sFragmentManager.beginTransaction();
-                        fragmentEverydayEvents = new EverydayEventsFragment_v2();
-                        fT.add(R.id.layout_for_everyday_events, (Fragment) fragmentEverydayEvents);
-                        fT.commit();
-                        Log.i("thread", "tread_two");
-                    }
-                }, 100, TimeUnit.MILLISECONDS);
+        if (generateEEFV2) {
+            final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+            executor.schedule(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            FragmentTransaction fT = sFragmentManager.beginTransaction();
+                            fragmentEverydayEvents = new EverydayEventsFragment_v2();
+                            fT.add(R.id.layout_for_everyday_events, (Fragment) fragmentEverydayEvents);
+                            fT.commit();
 
-        Log.i("thread", "tread_three");
-
-
+                        }
+                    }, 100, TimeUnit.MILLISECONDS);
+            generateEEFV2 = false;
+        }
     }
 
     public static void addRandomEventInBD(String txt, String date) {

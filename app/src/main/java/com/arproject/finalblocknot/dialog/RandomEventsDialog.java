@@ -39,13 +39,13 @@ public class RandomEventsDialog extends DialogFragment {
         imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
-        builder.setView(textEditView).setPositiveButton("saved",
+        builder.setView(textEditView).setPositiveButton("сохранить",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         saveOrNot = true;
                     }
-                }).setNegativeButton("no save", new DialogInterface.OnClickListener() {
+                }).setNegativeButton("удалить", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         saveOrNot = false;
@@ -69,6 +69,7 @@ public class RandomEventsDialog extends DialogFragment {
         editText.setHorizontallyScrolling(false);
         editText.setLines(10);
         editText.setHint(R.string.hint_random_events);
+        editText.setPadding(30, 0, 30, 50);
 
 
         return editText;

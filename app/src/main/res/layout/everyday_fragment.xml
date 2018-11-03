@@ -4,13 +4,13 @@
         android:layout_height="wrap_content"
         android:stretchColumns="2"
         android:id="@+id/table_for_everyday_events"
-        android:background="#bcdbdb"
+        android:background="#4776b9"
         android:padding="1dp"
         android:layout_margin="10dp"
     >
 
     <TableRow
-        android:background="#bd6578"
+        android:background="#144182"
         android:layout_marginBottom="1dp">
 
         <TextView
@@ -22,7 +22,7 @@
     </TableRow>
 
     <TableRow
-        android:background="#b72b3d"
+        android:background="#88afdd"
         android:layout_marginBottom="1dp">
 
         <TextView

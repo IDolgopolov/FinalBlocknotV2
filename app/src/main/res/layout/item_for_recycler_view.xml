@@ -4,21 +4,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height = "60dp"
     android:layout_width = "match_parent"
-    android:background="#e68d61">
+    android:background="@drawable/border_items"
+    >
 
     <TextView
     android:layout_width="300dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginStart="6dp"
     android:layout_height="50dp"
+    android:maxLines="2"
     android:text="Hello"
-    android:id="@+id/item_for_recycler_view"
-        />
+    android:id="@+id/item_for_recycler_view"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:textSize = "12sp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="10dp"
+        android:gravity="bottom"
+        android:layout_marginBottom="1dp"
         android:id="@+id/date_random_event"/>
 
     <Button
@@ -27,7 +32,6 @@
     android:layout_alignParentEnd="true"
     android:layout_alignParentTop="true"
     android:layout_marginTop="10dp"
-    android:layout_marginEnd = "20dp"
-    android:background="@drawable/button_control_circle"
-             />
+    android:layout_marginEnd = "10dp"
+    android:background="@drawable/button_control_circle" />
 </RelativeLayout>
