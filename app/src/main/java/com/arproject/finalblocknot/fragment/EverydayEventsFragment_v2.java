@@ -2,6 +2,7 @@ package com.arproject.finalblocknot.fragment;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.arproject.finalblocknot.MainActivity;
 import com.arproject.finalblocknot.R;
+import com.arproject.finalblocknot.dialog.EverydayDeleteAllDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,6 +30,7 @@ public class EverydayEventsFragment_v2 extends Fragment {
     private ArrayList<TextView> arrayDateTextView = new ArrayList<>();
     private ArrayList<TableLayout> arrayTable = new ArrayList<>();
     private GridLayout grid;
+    private FloatingActionButton buttonDeleteAll;
 
 
 
@@ -37,7 +40,7 @@ public class EverydayEventsFragment_v2 extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         grid = (GridLayout) inflater.inflate(R.layout.everyday_fragment_v2, null);
-        for (int i = 0; i < grid.getChildCount(); i++) {
+        for (int i = 0; i < grid.getChildCount() - 1; i++) {
             TableLayout tl = (TableLayout) grid.getChildAt(i);
             arrayTable.add(tl);
             for(int g = 0; g < tl.getChildCount(); g++) {
@@ -50,6 +53,15 @@ public class EverydayEventsFragment_v2 extends Fragment {
 
             }
         }
+        buttonDeleteAll = (FloatingActionButton) grid.findViewById(R.id.fab_delete_all);
+        buttonDeleteAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EverydayDeleteAllDialog dialog = new EverydayDeleteAllDialog();
+                dialog.show(MainActivity.sFragmentManager, "DELETE_ALL_ED");
+            }
+        });
+
         grid.removeAllViews();
 
         setDate();
@@ -98,6 +110,8 @@ public class EverydayEventsFragment_v2 extends Fragment {
         for(int i = 0; i < arrayTable.size(); i++) {
             gridFragment.addView(arrayTable.get(i));
         }
+        gridFragment.addView(buttonDeleteAll);
+
 
         return gridFragment;
     }
@@ -108,7 +122,7 @@ public class EverydayEventsFragment_v2 extends Fragment {
         int currentDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         int currentMonth = calendar.get(Calendar.MONTH) + 1; //отсчет месяцев идет с 0
         int currentYear = calendar.get(Calendar.YEAR);
-        String dateToday = "date: "  + Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
+        String dateToday = Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
                 + "." + Integer.toString(currentYear);
         arrayDateTextView.get(0).setText(dateToday);
         for (int i = 1; i < arrayDateTextView.size(); i++) {

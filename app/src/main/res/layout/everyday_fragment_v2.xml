@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/table_0"
@@ -9,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="#88afdd"
-        android:padding="1dp"
+        android:padding="2dp"
         android:stretchColumns="2">
 
         <TableRow
@@ -21,7 +22,9 @@
                 android:layout_height="15dp"
                 android:layout_span="2"
                 android:paddingStart="5dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold|italic"
+                android:typeface="serif"/>
         </TableRow>
 
         <TableRow
@@ -140,7 +143,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="#88afdd"
-        android:padding="1dp"
+        android:padding="2dp"
         android:stretchColumns="2">
 
         <TableRow
@@ -152,7 +155,9 @@
                 android:layout_height="15dp"
                 android:layout_span="2"
                 android:paddingStart="5dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold|italic"
+                android:typeface="serif"/>
         </TableRow>
 
         <TableRow
@@ -266,7 +271,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="#88afdd"
-        android:padding="1dp"
+        android:padding="2dp"
         android:stretchColumns="2">
 
         <TableRow
@@ -278,7 +283,9 @@
                 android:layout_height="15dp"
                 android:layout_span="2"
                 android:paddingStart="5dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold|italic"
+                android:typeface="serif"/>
         </TableRow>
 
         <TableRow
@@ -392,7 +399,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="#88afdd"
-        android:padding="1dp"
+        android:padding="2dp"
         android:stretchColumns="2">
 
         <TableRow
@@ -404,7 +411,9 @@
                 android:layout_height="15dp"
                 android:layout_span="2"
                 android:paddingStart="5dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold|italic"
+                android:typeface="serif"/>
         </TableRow>
 
         <TableRow
@@ -518,7 +527,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="#88afdd"
-        android:padding="1dp"
+        android:padding="2dp"
         android:stretchColumns="2">
 
         <TableRow
@@ -530,7 +539,9 @@
                 android:layout_height="15dp"
                 android:layout_span="2"
                 android:paddingStart="5dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold|italic"
+                android:typeface="serif"/>
         </TableRow>
 
         <TableRow
@@ -644,7 +655,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="#88afdd"
-        android:padding="1dp"
+        android:padding="2dp"
         android:stretchColumns="2">
 
         <TableRow
@@ -656,7 +667,9 @@
                 android:layout_height="15dp"
                 android:layout_span="2"
                 android:paddingStart="5dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold|italic"
+                android:typeface="serif"/>
         </TableRow>
 
         <TableRow
@@ -770,7 +783,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="#88afdd"
-        android:padding="1dp"
+        android:padding="2dp"
         android:stretchColumns="2">
 
         <TableRow
@@ -782,7 +795,9 @@
                 android:layout_height="15dp"
                 android:layout_span="2"
                 android:paddingStart="5dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:textStyle="bold|italic"
+                android:typeface="serif"/>
         </TableRow>
 
         <TableRow
@@ -889,6 +904,17 @@
                 android:textSize="12sp" />
         </TableRow>
     </TableLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_delete_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        app:backgroundTint="#E86969"
+        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="20dp"
+        app:srcCompat="@android:drawable/ic_delete"
+        />
 
 
 </GridLayout>

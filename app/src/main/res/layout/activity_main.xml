@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activity_main"
+    android:background="#C7FFCB"
     tools:context=".MainActivity"
 
     >
@@ -17,19 +18,6 @@
         android:layout_centerHorizontal="true"
         />
 
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_delete_all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_alignParentEnd="true"
-        app:backgroundTint="#E86969"
-        android:layout_above="@id/layout_for_recycler_view"
-        android:layout_marginBottom="17dp"
-        android:layout_marginEnd="20dp"
-        app:srcCompat="@android:drawable/ic_delete"
-        />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -49,7 +37,7 @@
         android:layout_height="200dp"
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
-        android:background="#f4e1c6"
+        android:background="#d5e5d7"
         />
 
 </RelativeLayout>

@@ -186,7 +186,7 @@ public class EverydayEventsFragment extends Fragment {
                     currentMonth++;
                 }
             }
-            dateToday = "date: "  + Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
+            dateToday = "date: gjjhhj"  + Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
                     + "." + Integer.toString(currentYear);
             arrayDateTextView.get(i).setText(dateToday);
         }

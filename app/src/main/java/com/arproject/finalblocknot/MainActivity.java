@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity  {
     public final static String TAG_CREATE_EVENT = "dialog_for_creating";
     public final static String TAG_EDITING_EVENT = "dialog_for_editing";
     private int displayHeight, displayWidth;
-    private FloatingActionButton buttonDeleteAll;
+    //private FloatingActionButton buttonDeleteAll;
     private boolean generateEEFV2 = false;
 
     @Override
@@ -80,14 +80,14 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
-        buttonDeleteAll = (FloatingActionButton) findViewById(R.id.fab_delete_all);
+      /*  buttonDeleteAll = (FloatingActionButton) findViewById(R.id.fab_delete_all);
         buttonDeleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EverydayDeleteAllDialog dialog = new EverydayDeleteAllDialog();
                 dialog.show(MainActivity.sFragmentManager, "DELETE_ALL_ED");
             }
-        });
+        }); */
 
         fragmentRandomEvents = new RandomEventsFragment();
 
