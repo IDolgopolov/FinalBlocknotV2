@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activity_main"
-    android:background="#C7FFCB"
+    android:background="#ddf3ac"
     tools:context=".MainActivity"
 
     >
@@ -17,6 +17,14 @@
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_above="@+id/layout_for_recycler_view"
+
+        android:layout_alignParentStart="true"
+        android:background="#a0a50d" />
 
 
     <android.support.design.widget.FloatingActionButton
@@ -37,7 +45,7 @@
         android:layout_height="200dp"
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
-        android:background="#d5e5d7"
+        android:background="#fbff8e"
         />
 
 </RelativeLayout>

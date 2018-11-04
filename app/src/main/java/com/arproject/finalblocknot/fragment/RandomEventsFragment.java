@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.arproject.finalblocknot.ItemREDecoration;
 import com.arproject.finalblocknot.R;
 import com.arproject.finalblocknot.adapters.RecyclerAdapter;
 
@@ -26,6 +27,7 @@ public class RandomEventsFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        mRecyclerView.addItemDecoration(new ItemREDecoration(8, 10));
 
         adapter = new RecyclerAdapter();
         mRecyclerView.setAdapter(adapter);

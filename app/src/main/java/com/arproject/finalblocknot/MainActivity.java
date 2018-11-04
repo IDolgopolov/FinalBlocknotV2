@@ -80,18 +80,7 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
-      /*  buttonDeleteAll = (FloatingActionButton) findViewById(R.id.fab_delete_all);
-        buttonDeleteAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EverydayDeleteAllDialog dialog = new EverydayDeleteAllDialog();
-                dialog.show(MainActivity.sFragmentManager, "DELETE_ALL_ED");
-            }
-        }); */
-
         fragmentRandomEvents = new RandomEventsFragment();
-
-
 
         final FragmentTransaction fragmentTransaction = sFragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.layout_for_recycler_view, (Fragment) fragmentRandomEvents);

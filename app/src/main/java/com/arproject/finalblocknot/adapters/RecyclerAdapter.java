@@ -37,8 +37,8 @@ public class RecyclerAdapter extends  RecyclerView.Adapter<RecyclerAdapter.ViewH
 
             mItem = item;
             textView = (TextView) mItem.getChildAt(0);
-            buttonDelete = (Button) mItem.getChildAt(2);
-            dateView = (TextView) mItem.getChildAt(1);
+            buttonDelete = (Button) mItem.getChildAt(1);
+            dateView = (TextView) mItem.getChildAt(2);
 
 
             buttonDelete.setOnClickListener(new View.OnClickListener() {
