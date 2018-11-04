@@ -4,12 +4,13 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <TableLayout
         android:id="@+id/table_0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="#88afdd"
+        android:background="@android:drawable/dialog_holo_light_frame"
         android:padding="2dp"
         android:stretchColumns="2">
 
@@ -71,7 +72,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -92,7 +95,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -132,19 +137,20 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
 
     </TableLayout>
 
-
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <TableLayout
         android:id="@+id/table_1"
+        android:background="@android:drawable/dialog_holo_light_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="#88afdd"
         android:padding="2dp"
         android:stretchColumns="2">
 
@@ -181,7 +187,9 @@
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect|textNoSuggestions"
                 android:paddingBottom="0dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -202,7 +210,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -223,7 +233,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -244,7 +256,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow android:background="#eeebc2">
@@ -263,16 +277,18 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
     </TableLayout>
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <TableLayout
         android:id="@+id/table_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="#88afdd"
+        android:background="@android:drawable/dialog_holo_light_frame"
         android:padding="2dp"
         android:stretchColumns="2">
 
@@ -309,7 +325,9 @@
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect|textNoSuggestions"
                 android:paddingBottom="0dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -330,7 +348,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -351,7 +371,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -372,7 +394,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow android:background="#eeebc2">
@@ -391,16 +415,18 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
     </TableLayout>
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <TableLayout
         android:id="@+id/table_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="#88afdd"
+        android:background="@android:drawable/dialog_holo_light_frame"
         android:padding="2dp"
         android:stretchColumns="2">
 
@@ -437,7 +463,9 @@
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect|textNoSuggestions"
                 android:paddingBottom="0dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -458,7 +486,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -479,7 +509,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -500,7 +532,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow android:background="#eeebc2">
@@ -519,16 +553,18 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
     </TableLayout>
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <TableLayout
         android:id="@+id/table_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="#88afdd"
+        android:background="@android:drawable/dialog_holo_light_frame"
         android:padding="2dp"
         android:stretchColumns="2">
 
@@ -565,7 +601,9 @@
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect|textNoSuggestions"
                 android:paddingBottom="0dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -586,7 +624,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -607,7 +647,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -628,7 +670,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow android:background="#eeebc2">
@@ -647,16 +691,18 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
     </TableLayout>
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <TableLayout
         android:id="@+id/table_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="#88afdd"
+        android:background="@android:drawable/dialog_holo_light_frame"
         android:padding="2dp"
         android:stretchColumns="2">
 
@@ -693,7 +739,9 @@
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect|textNoSuggestions"
                 android:paddingBottom="0dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -714,7 +762,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -735,7 +785,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -756,7 +808,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow android:background="#eeebc2">
@@ -775,16 +829,18 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
     </TableLayout>
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <TableLayout
         android:id="@+id/table_6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="#88afdd"
+        android:background="@android:drawable/dialog_holo_light_frame"
         android:padding="2dp"
         android:stretchColumns="2">
 
@@ -821,7 +877,9 @@
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect|textNoSuggestions"
                 android:paddingBottom="0dp"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -842,7 +900,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -863,7 +923,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow
@@ -884,7 +946,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow android:background="#eeebc2">
@@ -903,7 +967,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
     </TableLayout>
 
@@ -912,7 +978,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        app:backgroundTint="#E86969"
+        app:backgroundTint="#254f00"
         android:layout_marginBottom="17dp"
         android:layout_marginEnd="20dp"
         app:srcCompat="@android:drawable/ic_delete"

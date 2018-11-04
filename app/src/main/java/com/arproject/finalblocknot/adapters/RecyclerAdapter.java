@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,7 +29,7 @@ public class RecyclerAdapter extends  RecyclerView.Adapter<RecyclerAdapter.ViewH
             private RelativeLayout mItem;
             private TextView textView;
             private TextView dateView;
-            private Button buttonDelete;
+            private ImageButton buttonDelete;
             private int ID;
             private String trueText;
 
@@ -37,7 +38,7 @@ public class RecyclerAdapter extends  RecyclerView.Adapter<RecyclerAdapter.ViewH
 
             mItem = item;
             textView = (TextView) mItem.getChildAt(0);
-            buttonDelete = (Button) mItem.getChildAt(1);
+            buttonDelete = (ImageButton) mItem.getChildAt(1);
             dateView = (TextView) mItem.getChildAt(2);
 
 

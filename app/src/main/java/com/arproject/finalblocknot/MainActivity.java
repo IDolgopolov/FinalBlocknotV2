@@ -5,27 +5,20 @@ package com.arproject.finalblocknot;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.BundleCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.arproject.finalblocknot.data.DBEDHelper;
 import com.arproject.finalblocknot.data.DBHelper;
-import com.arproject.finalblocknot.dialog.EverydayDeleteAllDialog;
 import com.arproject.finalblocknot.dialog.RandomEventsDialog;
-import com.arproject.finalblocknot.fragment.EverydayEventsFragment;
 import com.arproject.finalblocknot.fragment.EverydayEventsFragment_v2;
 import com.arproject.finalblocknot.fragment.RandomEventsFragment;
 

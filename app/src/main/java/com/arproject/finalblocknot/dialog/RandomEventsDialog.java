@@ -39,18 +39,28 @@ public class RandomEventsDialog extends DialogFragment {
         imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
-        builder.setView(textEditView).setPositiveButton("сохранить",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        saveOrNot = true;
-                    }
-                }).setNegativeButton("удалить", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        saveOrNot = false;
-            }
-        });
+        if(getTag().equals(MainActivity.TAG_CREATE_EVENT)) {
+            builder.setView(textEditView).setPositiveButton("сохранить",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            saveOrNot = true;
+                        }
+                    }).setNegativeButton("удалить", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    saveOrNot = false;
+                }
+            });
+        } else {
+            builder.setView(textEditView).setPositiveButton("сохранить",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            saveOrNot = true;
+                        }
+                    });
+        }
 
 
         return builder.create();

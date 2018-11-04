@@ -14,16 +14,18 @@
     android:layout_height="50dp"
     android:maxLines="2"
     android:text="Hello"
+    android:typeface="monospace"
+    android:textStyle="italic"
     android:id="@+id/item_for_recycler_view"/>
 
-    <Button
-        android:layout_width="35dp"
-        android:layout_height = "35dp"
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/button_control_circle" />
+        android:background="@drawable/images"/>
 
     <TextView
         android:id="@+id/date_random_event"
@@ -32,6 +34,8 @@
         android:layout_marginStart="120dp"
         android:layout_alignParentBottom="true"
         android:textSize="12sp" />
+
+
 
 
 </RelativeLayout>

@@ -8,7 +8,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
 import com.arproject.finalblocknot.MainActivity;
-import com.arproject.finalblocknot.fragment.EverydayEventsFragment;
 import com.arproject.finalblocknot.fragment.EverydayEventsFragment_v2;
 
 
