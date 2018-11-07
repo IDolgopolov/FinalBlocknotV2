@@ -106,6 +106,14 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        dbED.closeDB();
+        db.closeDB();
+    }
+
     public static void addRandomEventInBD(String txt, String date) {
         db.addInformation(txt, date);
         fragmentRandomEvents.updateListRandomEvents();

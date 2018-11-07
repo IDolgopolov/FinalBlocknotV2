@@ -9,9 +9,11 @@ import android.util.Log;
 
 public class DBEDHelper extends SQLiteOpenHelper {
     private static final String FILE_DBED_NAME = "everyday_events.db";
+    private static SQLiteDatabase db;
 
     public DBEDHelper(Context context) {
         super(context, FILE_DBED_NAME, null, DBConstants.DB_VERSION);
+        db = this.getWritableDatabase();
     }
 
     @Override
@@ -29,7 +31,7 @@ public class DBEDHelper extends SQLiteOpenHelper {
     }
 
     public void addEDInformation(String txt, String date, String position) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        if (db == null) db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(DBConstants.INFORMATION, txt);
@@ -37,11 +39,10 @@ public class DBEDHelper extends SQLiteOpenHelper {
         cv.put(DBConstants.POSITION, position);
 
         db.insert(DBConstants.TABLE_ED_NAME, null, cv);
-        db.close();
     }
 
     public void updateEDInformation(String text, String date, String position) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        if (db == null) db = this.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
         cv.put(DBConstants.INFORMATION, text);
@@ -49,11 +50,10 @@ public class DBEDHelper extends SQLiteOpenHelper {
         db.update(DBConstants.TABLE_ED_NAME, cv, DBConstants.DATE + " = ?"
                 + " AND " + DBConstants.POSITION + " = ?", new String[] {date, position});
 
-        db.close();
     }
 
     public String getInformation(String date, String position) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        if (db == null) db = this.getWritableDatabase();
 
         Cursor cursor = db.query(
                 DBConstants.TABLE_ED_NAME,
@@ -75,15 +75,18 @@ public class DBEDHelper extends SQLiteOpenHelper {
             text = null;
         }
         cursor.close();
-        db.close();
 
         return text;
     }
 
     public void deleteAllEDInformation() {
-        SQLiteDatabase db = this.getWritableDatabase();
+        if (db == null) db = this.getWritableDatabase();
         db.delete(DBConstants.TABLE_ED_NAME, null, null);
-        db.close();
+
+    }
+
+    public void closeDB() {
+        if (db == null) db.close();
     }
 
 

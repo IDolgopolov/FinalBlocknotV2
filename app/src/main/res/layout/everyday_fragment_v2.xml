@@ -124,7 +124,9 @@
                 android:layout_column="1"
                 android:background="@android:color/transparent"
                 android:inputType="textAutoCorrect"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:typeface="serif"
+                android:textStyle="italic"/>
         </TableRow>
 
         <TableRow android:background="#eeebc2">
@@ -985,7 +987,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        app:backgroundTint="#FFFF"
+        app:backgroundTint="#e6e6e6"
+        app:fabSize="mini"
         android:layout_marginBottom="17dp"
         android:layout_marginEnd="20dp"
         app:srcCompat="@android:drawable/ic_delete"

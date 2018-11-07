@@ -13,9 +13,11 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private final static String FILE_DB_NAME = "random_events.db";
+    private static SQLiteDatabase db;
 
     public DBHelper(Context context) {
         super(context, FILE_DB_NAME, null, DBConstants.DB_VERSION);
+        db = this.getWritableDatabase();
 
     }
 
@@ -34,28 +36,26 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void addInformation(String text, String date) {
-            SQLiteDatabase db = this.getWritableDatabase();
+            if (db == null) db = this.getWritableDatabase();
             ContentValues cv = new ContentValues();
 
             cv.put(DBConstants.INFORMATION, text);
             cv.put(DBConstants.DATE, date);
 
             db.insert(DBConstants.TABLE_NAME, null, cv);
-            db.close();
 
     }
 
 
     public void deleteInformation(int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        if (db == null) db = this.getWritableDatabase();
 
         db.delete(DBConstants.TABLE_NAME, DBConstants._ID + " = " + Integer.toString(id), null);
-        db.close();
     }
 
 
     public String getInformation(int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        if (db == null) db = this.getWritableDatabase();
 
         Cursor cursor = db.query(
                 DBConstants.TABLE_NAME,
@@ -72,13 +72,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String text = cursor.getString(cursor.getColumnIndexOrThrow(DBConstants.INFORMATION));
         cursor.close();
-        db.close();
 
         return text;
     }
 
     public ArrayList<OneRandomEvent> getAllInformation() {
-        SQLiteDatabase db = this.getWritableDatabase();
+        if (db == null) db = this.getWritableDatabase();
         Cursor cursor = db.query(
                 DBConstants.TABLE_NAME,
                 new String[] { DBConstants.INFORMATION, DBConstants._ID, DBConstants.DATE},
@@ -101,20 +100,22 @@ public class DBHelper extends SQLiteOpenHelper {
             listORE.add(ORE);
             if(!cursor.isLast()) cursor.moveToNext();
         }
-        db.close();
 
         return listORE;
     }
 
     public void updateInformation(String text, int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        if (db == null) db = this.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
         cv.put(DBConstants.INFORMATION, text);
 
         db.update(DBConstants.TABLE_NAME, cv, DBConstants._ID + " = ?", new String[] {Integer.toString(id)});
 
-        db.close();
+    }
+
+    public void closeDB() {
+        if (db == null) db.close();
     }
 
 
