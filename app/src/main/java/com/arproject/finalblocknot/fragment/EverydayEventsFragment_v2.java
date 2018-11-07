@@ -6,11 +6,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -70,8 +73,10 @@ public class EverydayEventsFragment_v2 extends Fragment {
 
             final EditText editText =  arrayEditText.get(i);
 
-            final String idPosition = Integer.toString(editText.getId());
-            int tableNumber = Character.getNumericValue(idPosition.charAt(1));
+            String id = getResources().getResourceEntryName(editText.getId());
+            Log.e("idPosition", id);
+            final String idPosition = Character.toString(id.charAt(3));
+            int tableNumber = Character.getNumericValue(id.charAt(1));
             final String date = arrayDateTextView.get(tableNumber).getText().toString();
             String information = MainActivity.getEDInformation(date, idPosition);
 
@@ -111,6 +116,11 @@ public class EverydayEventsFragment_v2 extends Fragment {
             gridFragment.addView(arrayTable.get(i));
         }
         gridFragment.addView(buttonDeleteAll);
+
+        LinearLayout emptyLayout = new LinearLayout(getContext());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 150);
+        emptyLayout.setLayoutParams(params);
+        gridFragment.addView(emptyLayout);
 
 
         return gridFragment;

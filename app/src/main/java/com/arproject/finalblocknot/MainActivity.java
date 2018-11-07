@@ -9,6 +9,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.View;
@@ -34,8 +35,7 @@ public class MainActivity extends AppCompatActivity  {
     public static FragmentManager sFragmentManager;
     public final static String TAG_CREATE_EVENT = "dialog_for_creating";
     public final static String TAG_EDITING_EVENT = "dialog_for_editing";
-    private int displayHeight, displayWidth;
-    //private FloatingActionButton buttonDeleteAll;
+    private int displayHeight;
     private boolean generateEEFV2 = false;
 
     @Override
@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity  {
         Point pointSize = new Point();
         display.getSize(pointSize);
         displayHeight = pointSize.y;
-        displayWidth = pointSize.x;
 
         int heightForRE = (int) Math.round(displayHeight * 0.4);
         LinearLayout layoutRE = findViewById(R.id.layout_for_recycler_view);
@@ -57,6 +56,12 @@ public class MainActivity extends AppCompatActivity  {
         paramsRE.height = heightForRE;
         paramsRE.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         layoutRE.setLayoutParams(paramsRE);
+
+        int heightForEE = (int) Math.round(displayHeight * 0.6);
+        NestedScrollView scrollView = findViewById(R.id.layout_for_everyday_events);
+        RelativeLayout.LayoutParams paramsEE = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+        paramsEE.height = heightForEE;
+        scrollView.setLayoutParams(paramsEE);
 
         db = new DBHelper(getApplicationContext());
         dbED = new DBEDHelper(getApplicationContext());

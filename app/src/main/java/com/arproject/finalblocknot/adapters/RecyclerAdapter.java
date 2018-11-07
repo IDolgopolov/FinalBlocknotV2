@@ -1,5 +1,6 @@
 package com.arproject.finalblocknot.adapters;
 
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.arproject.finalblocknot.MainActivity;
 import com.arproject.finalblocknot.OneRandomEvent;
 import com.arproject.finalblocknot.R;
+import com.arproject.finalblocknot.dialog.RandomEventsDeleteDialog;
 import com.arproject.finalblocknot.dialog.RandomEventsDialog;
 
 import java.util.ArrayList;
@@ -45,7 +47,11 @@ public class RecyclerAdapter extends  RecyclerView.Adapter<RecyclerAdapter.ViewH
             buttonDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.deleteRandomEventFromDB(ID);
+                    RandomEventsDeleteDialog dialog = new RandomEventsDeleteDialog();
+                    Bundle args = new Bundle();
+                    args.putInt("ID", ID);
+                    dialog.setArguments(args);
+                    dialog.show(MainActivity.sFragmentManager, "REDelete");
                 }
             });
 

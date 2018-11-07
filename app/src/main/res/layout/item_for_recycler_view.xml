@@ -4,7 +4,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height = "70dp"
     android:layout_width = "match_parent"
-    android:background="@drawable/border_items"
+    android:background="@android:drawable/dialog_holo_light_frame"
     >
 
     <TextView
@@ -19,11 +19,11 @@
     android:id="@+id/item_for_recycler_view"/>
 
     <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/images"/>
 
