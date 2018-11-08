@@ -4,16 +4,17 @@ package com.arproject.finalblocknot.fragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -111,11 +112,14 @@ public class EverydayEventsFragment_v2 extends Fragment {
         GridLayout gridFragment = new GridLayout(getContext());
         gridFragment.setColumnCount(2);
         gridFragment.setUseDefaultMargins(true);
-        gridFragment.setLayoutParams(new ViewGroup.LayoutParams(GridLayout.LayoutParams.WRAP_CONTENT, GridLayout.LayoutParams.WRAP_CONTENT));
         for(int i = 0; i < arrayTable.size(); i++) {
             gridFragment.addView(arrayTable.get(i));
         }
         gridFragment.addView(buttonDeleteAll);
+        NestedScrollView.LayoutParams paramsGrid = new NestedScrollView.LayoutParams(GridLayout.LayoutParams.WRAP_CONTENT, GridLayout.LayoutParams.WRAP_CONTENT);
+        paramsGrid.gravity = Gravity.FILL_HORIZONTAL;
+        gridFragment.setLayoutParams(paramsGrid);
+
 
         LinearLayout emptyLayout = new LinearLayout(getContext());
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 150);

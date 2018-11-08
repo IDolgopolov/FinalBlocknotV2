@@ -4,6 +4,7 @@ package com.arproject.finalblocknot;
 
 import android.graphics.Point;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity  {
     public static FragmentManager sFragmentManager;
     public final static String TAG_CREATE_EVENT = "dialog_for_creating";
     public final static String TAG_EDITING_EVENT = "dialog_for_editing";
-    private int displayHeight;
+    public int displayHeight, displayWidth;
     private boolean generateEEFV2 = false;
 
     @Override
@@ -49,19 +50,20 @@ public class MainActivity extends AppCompatActivity  {
         Point pointSize = new Point();
         display.getSize(pointSize);
         displayHeight = pointSize.y;
+        displayWidth = pointSize.x;
 
         int heightForRE = (int) Math.round(displayHeight * 0.4);
-        LinearLayout layoutRE = findViewById(R.id.layout_for_recycler_view);
+        CoordinatorLayout layoutRE = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
         RelativeLayout.LayoutParams paramsRE = (RelativeLayout.LayoutParams) layoutRE.getLayoutParams();
         paramsRE.height = heightForRE;
         paramsRE.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         layoutRE.setLayoutParams(paramsRE);
 
-        int heightForEE = (int) Math.round(displayHeight * 0.6);
+       /* int heightForEE = (int) Math.round(displayHeight * 0.6);
         NestedScrollView scrollView = findViewById(R.id.layout_for_everyday_events);
         RelativeLayout.LayoutParams paramsEE = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
         paramsEE.height = heightForEE;
-        scrollView.setLayoutParams(paramsEE);
+        scrollView.setLayoutParams(paramsEE); */
 
         db = new DBHelper(getApplicationContext());
         dbED = new DBEDHelper(getApplicationContext());
@@ -95,8 +97,11 @@ public class MainActivity extends AppCompatActivity  {
                     new Runnable() {
                         @Override
                         public void run() {
+                            Bundle args = new Bundle();
+                            args.putInt("columnWidth", Math.round(displayWidth/2));
                             FragmentTransaction fT = sFragmentManager.beginTransaction();
                             fragmentEverydayEvents = new EverydayEventsFragment_v2();
+                            fragmentEverydayEvents.setArguments(args);
                             fT.add(R.id.layout_for_everyday_events, (Fragment) fragmentEverydayEvents);
                             fT.commit();
 
