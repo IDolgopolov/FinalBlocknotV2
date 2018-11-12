@@ -4,6 +4,6 @@
     android:layout_height="match_parent"
     android:id="@+id/recycler_view"
     android:scrollbars="vertical"
-    android:background="#f7f7f7">
+    android:background="#00f7f7f7">
 
 </android.support.v7.widget.RecyclerView>

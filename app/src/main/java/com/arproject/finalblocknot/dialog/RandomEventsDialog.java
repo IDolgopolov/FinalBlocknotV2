@@ -62,9 +62,10 @@ public class RandomEventsDialog extends DialogFragment {
                         }
                     });
         }
+        Dialog dialog = builder.create();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-
-        return builder.create();
+        return dialog;
     }
 
 

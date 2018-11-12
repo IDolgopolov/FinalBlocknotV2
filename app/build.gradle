@@ -8,7 +8,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.support.everyday_fragment_v3.runner.AndroidJUnitRunner"
         resConfigs "ru"
     }
     buildTypes {
@@ -29,6 +29,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:gridlayout-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
 
 

@@ -4,21 +4,17 @@ package com.arproject.finalblocknot.fragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.NestedScrollView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
 
 import com.arproject.finalblocknot.MainActivity;
 import com.arproject.finalblocknot.R;
@@ -28,12 +24,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class EverydayEventsFragment_v2 extends Fragment {
+public class EverydayEventsFragment_v3 extends Fragment {
 
     private static ArrayList<EditText> arrayEditText = new ArrayList<>();
     private ArrayList<TextView> arrayDateTextView = new ArrayList<>();
     private ArrayList<TableLayout> arrayTable = new ArrayList<>();
-    private GridLayout grid;
+    private LinearLayout layoutParent;
     private FloatingActionButton buttonDeleteAll;
 
 
@@ -42,22 +38,34 @@ public class EverydayEventsFragment_v2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        int widthTl = (int) Math.round(getArguments().getInt("width") * 0.46);
+        int heightRow = (int) Math.round(getArguments().getInt("height") * 0.04);
 
-        grid = (GridLayout) inflater.inflate(R.layout.everyday_fragment_v2, null);
-        for (int i = 0; i < grid.getChildCount() - 1; i++) {
-            TableLayout tl = (TableLayout) grid.getChildAt(i);
-            arrayTable.add(tl);
-            for(int g = 0; g < tl.getChildCount(); g++) {
-                TableRow row = (TableRow) tl.getChildAt(g);
-                if (g == 0) {
-                    arrayDateTextView.add((TextView) row.getChildAt(0));
-                } else {
-                    arrayEditText.add((EditText) row.getChildAt(1));
+        layoutParent = (LinearLayout) inflater.inflate(R.layout.everyday_fragment_v3, null);
+
+        for (int i = 0; i < layoutParent.getChildCount() - 1; i++) {
+            LinearLayout layout = (LinearLayout) layoutParent.getChildAt(i);
+            for (int g = 0; g < layout.getChildCount(); g++) {
+                TableLayout tl = (TableLayout) layout.getChildAt(g);
+                tl.setMinimumWidth(widthTl);
+                arrayTable.add(tl);
+                for(int d = 0; d < tl.getChildCount(); d++) {
+                    TableRow row = (TableRow) tl.getChildAt(d);
+                    row.setMinimumHeight(heightRow);
+                    row.setMinimumWidth(widthTl);
+                    if (d == 0) {
+                        arrayDateTextView.add((TextView) row.getChildAt(0));
+                    } else {
+                        EditText eT = (EditText) row.getChildAt(1);
+
+                       // eT.setMinimumWidth(widthTl - row.getChildAt(0).getWidth());
+                        arrayEditText.add(eT);
+                    }
                 }
-
             }
         }
-        buttonDeleteAll = (FloatingActionButton) grid.findViewById(R.id.fab_delete_all);
+
+        buttonDeleteAll = (FloatingActionButton) layoutParent.findViewById(R.id.fab_delete_all);
         buttonDeleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +74,6 @@ public class EverydayEventsFragment_v2 extends Fragment {
             }
         });
 
-        grid.removeAllViews();
 
         setDate();
 
@@ -109,25 +116,8 @@ public class EverydayEventsFragment_v2 extends Fragment {
 
         }
 
-        GridLayout gridFragment = new GridLayout(getContext());
-        gridFragment.setColumnCount(2);
-        gridFragment.setUseDefaultMargins(true);
-        for(int i = 0; i < arrayTable.size(); i++) {
-            gridFragment.addView(arrayTable.get(i));
-        }
-        gridFragment.addView(buttonDeleteAll);
-        NestedScrollView.LayoutParams paramsGrid = new NestedScrollView.LayoutParams(GridLayout.LayoutParams.WRAP_CONTENT, GridLayout.LayoutParams.WRAP_CONTENT);
-        paramsGrid.gravity = Gravity.FILL_HORIZONTAL;
-        gridFragment.setLayoutParams(paramsGrid);
 
-
-        LinearLayout emptyLayout = new LinearLayout(getContext());
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 150);
-        emptyLayout.setLayoutParams(params);
-        gridFragment.addView(emptyLayout);
-
-
-        return gridFragment;
+        return layoutParent;
     }
 
     private void setDate() {

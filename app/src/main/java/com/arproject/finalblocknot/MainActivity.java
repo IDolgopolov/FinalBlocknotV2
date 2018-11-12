@@ -10,18 +10,16 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.arproject.finalblocknot.data.DBEDHelper;
 import com.arproject.finalblocknot.data.DBHelper;
 import com.arproject.finalblocknot.dialog.RandomEventsDialog;
-import com.arproject.finalblocknot.fragment.EverydayEventsFragment_v2;
+import com.arproject.finalblocknot.fragment.EverydayEventsFragment_v3;
 import com.arproject.finalblocknot.fragment.RandomEventsFragment;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -32,7 +30,7 @@ public class MainActivity extends AppCompatActivity  {
     public static DBEDHelper dbED;
     private DialogFragment dialogRandomEvents;
     private static RandomEventsFragment fragmentRandomEvents;
-    private static EverydayEventsFragment_v2 fragmentEverydayEvents;
+    private static EverydayEventsFragment_v3 fragmentEverydayEvents;
     public static FragmentManager sFragmentManager;
     public final static String TAG_CREATE_EVENT = "dialog_for_creating";
     public final static String TAG_EDITING_EVENT = "dialog_for_editing";
@@ -58,12 +56,6 @@ public class MainActivity extends AppCompatActivity  {
         paramsRE.height = heightForRE;
         paramsRE.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         layoutRE.setLayoutParams(paramsRE);
-
-       /* int heightForEE = (int) Math.round(displayHeight * 0.6);
-        NestedScrollView scrollView = findViewById(R.id.layout_for_everyday_events);
-        RelativeLayout.LayoutParams paramsEE = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
-        paramsEE.height = heightForEE;
-        scrollView.setLayoutParams(paramsEE); */
 
         db = new DBHelper(getApplicationContext());
         dbED = new DBEDHelper(getApplicationContext());
@@ -98,9 +90,10 @@ public class MainActivity extends AppCompatActivity  {
                         @Override
                         public void run() {
                             Bundle args = new Bundle();
-                            args.putInt("columnWidth", Math.round(displayWidth/2));
+                            args.putInt("width", displayWidth);
+                            args.putInt("height", displayHeight);
                             FragmentTransaction fT = sFragmentManager.beginTransaction();
-                            fragmentEverydayEvents = new EverydayEventsFragment_v2();
+                            fragmentEverydayEvents = new EverydayEventsFragment_v3();
                             fragmentEverydayEvents.setArguments(args);
                             fT.add(R.id.layout_for_everyday_events, (Fragment) fragmentEverydayEvents);
                             fT.commit();
