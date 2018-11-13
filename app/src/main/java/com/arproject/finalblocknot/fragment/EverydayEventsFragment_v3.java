@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -20,6 +21,8 @@ import com.arproject.finalblocknot.MainActivity;
 import com.arproject.finalblocknot.R;
 import com.arproject.finalblocknot.dialog.EverydayDeleteAllDialog;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -38,9 +41,8 @@ public class EverydayEventsFragment_v3 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        int widthTl = (int) Math.round(getArguments().getInt("width") * 0.46);
-        int heightRow = (int) Math.round(getArguments().getInt("height") * 0.04);
-
+        final int widthTl = (int) Math.round(getArguments().getInt("width") * 0.46);
+        final int heightRow = (int) Math.round(getArguments().getInt("height") * 0.04);
         layoutParent = (LinearLayout) inflater.inflate(R.layout.everyday_fragment_v3, null);
 
         for (int i = 0; i < layoutParent.getChildCount() - 1; i++) {
@@ -50,16 +52,26 @@ public class EverydayEventsFragment_v3 extends Fragment {
                 tl.setMinimumWidth(widthTl);
                 arrayTable.add(tl);
                 for(int d = 0; d < tl.getChildCount(); d++) {
-                    TableRow row = (TableRow) tl.getChildAt(d);
+                    final TableRow row = (TableRow) tl.getChildAt(d);
                     row.setMinimumHeight(heightRow);
                     row.setMinimumWidth(widthTl);
                     if (d == 0) {
                         arrayDateTextView.add((TextView) row.getChildAt(0));
                     } else {
-                        EditText eT = (EditText) row.getChildAt(1);
+                        final TextView tV = (TextView) row.getChildAt(0);
+                         final EditText eT = (EditText) row.getChildAt(1);
+                         arrayEditText.add(eT);
+                         tV.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                            @Override
+                            public void onGlobalLayout() {
+                                int widthTV = tV.getWidth();
+                                tV.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                                TableRow.LayoutParams params = new TableRow.LayoutParams( widthTl - widthTV, heightRow);
+                                eT.setLayoutParams(params);
+                            }
+                        });
 
-                       // eT.setMinimumWidth(widthTl - row.getChildAt(0).getWidth());
-                        arrayEditText.add(eT);
+
                     }
                 }
             }
@@ -76,13 +88,13 @@ public class EverydayEventsFragment_v3 extends Fragment {
 
 
         setDate();
-
+        Log.i("information_my", arrayEditText.size() + "size");
         for(int i = 0; i < arrayEditText.size(); i++) {
 
             final EditText editText =  arrayEditText.get(i);
 
             String id = getResources().getResourceEntryName(editText.getId());
-            Log.e("idPosition", id);
+
             final String idPosition = Character.toString(id.charAt(3));
             int tableNumber = Character.getNumericValue(id.charAt(1));
             final String date = arrayDateTextView.get(tableNumber).getText().toString();
@@ -126,10 +138,15 @@ public class EverydayEventsFragment_v3 extends Fragment {
         int currentDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         int currentMonth = calendar.get(Calendar.MONTH) + 1; //отсчет месяцев идет с 0
         int currentYear = calendar.get(Calendar.YEAR);
-        String dateToday = Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
+        DateFormat df = new SimpleDateFormat("EEE");
+        String dayOfWeek = df.format(Calendar.getInstance().getTime());
+
+        String dateToday =  dayOfWeek + ", " + Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
                 + "." + Integer.toString(currentYear);
         arrayDateTextView.get(0).setText(dateToday);
         for (int i = 1; i < arrayDateTextView.size(); i++) {
+            calendar.add(Calendar.DAY_OF_WEEK, 1);
+            dayOfWeek = df.format(calendar.getTime());
             if(currentDayOfMonth < maxDayInMonth) {
                 currentDayOfMonth++;
             } else {
@@ -141,7 +158,7 @@ public class EverydayEventsFragment_v3 extends Fragment {
                     currentMonth++;
                 }
             }
-            dateToday = Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
+            dateToday =  dayOfWeek + ", " +  Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
                     + "." + Integer.toString(currentYear);
             arrayDateTextView.get(i).setText(dateToday);
         }

@@ -27,7 +27,7 @@ public class RandomEventsFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mRecyclerView.addItemDecoration(new ItemREDecoration(0, 10));
+        mRecyclerView.addItemDecoration(new ItemREDecoration(12, 15));
 
         adapter = new RecyclerAdapter();
         mRecyclerView.setAdapter(adapter);

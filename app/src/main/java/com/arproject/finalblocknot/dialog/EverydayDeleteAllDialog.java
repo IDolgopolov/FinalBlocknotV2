@@ -17,11 +17,16 @@ public class EverydayDeleteAllDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setPositiveButton("Удалить безвозвратно все записи", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Удалить безвозвратно все записи", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 MainActivity.deleteAllEDInformation();
                 EverydayEventsFragment_v3.deleteAllInformation();
+            }
+        }).setPositiveButton("отменить удаление", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
             }
         });
 

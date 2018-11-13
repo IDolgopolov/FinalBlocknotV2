@@ -4,7 +4,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height = "70dp"
     android:layout_width = "match_parent"
-    android:background="@android:drawable/dialog_holo_light_frame"
+    android:background="@drawable/button_control_circle"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
     >
 
     <TextView
