@@ -41,20 +41,20 @@ public class RandomEventsDialog extends DialogFragment {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
         if(getTag().equals(MainActivity.TAG_CREATE_EVENT)) {
-            builder.setView(textEditView).setPositiveButton("сохранить",
+            builder.setView(textEditView).setPositiveButton(R.string.save,
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             saveOrNot = true;
                         }
-                    }).setNegativeButton("удалить", new DialogInterface.OnClickListener() {
+                    }).setNegativeButton(R.string.delete, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     saveOrNot = false;
                 }
             });
         } else {
-            builder.setView(textEditView).setPositiveButton("сохранить",
+            builder.setView(textEditView).setPositiveButton(R.string.save,
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {

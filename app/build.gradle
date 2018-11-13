@@ -9,7 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.everyday_fragment_v3.runner.AndroidJUnitRunner"
-        resConfigs "ru"
+        resConfigs "en", "ru"
     }
     buildTypes {
 

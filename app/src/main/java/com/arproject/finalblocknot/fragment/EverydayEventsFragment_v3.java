@@ -1,6 +1,7 @@
 package com.arproject.finalblocknot.fragment;
 
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -83,12 +85,13 @@ public class EverydayEventsFragment_v3 extends Fragment {
             public void onClick(View v) {
                 EverydayDeleteAllDialog dialog = new EverydayDeleteAllDialog();
                 dialog.show(MainActivity.sFragmentManager, "DELETE_ALL_ED");
+
             }
         });
 
 
         setDate();
-        Log.i("information_my", arrayEditText.size() + "size");
+
         for(int i = 0; i < arrayEditText.size(); i++) {
 
             final EditText editText =  arrayEditText.get(i);

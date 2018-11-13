@@ -8,6 +8,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
 import com.arproject.finalblocknot.MainActivity;
+import com.arproject.finalblocknot.R;
 
 public class RandomEventsDeleteDialog extends DialogFragment {
     private int id;
@@ -18,12 +19,12 @@ public class RandomEventsDeleteDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         id = getArguments().getInt("ID");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Удалить запись?").setPositiveButton("отменить", new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.question_delete_all).setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
             }
-        }).setNegativeButton("удалить", new DialogInterface.OnClickListener() {
+        }).setNegativeButton(R.string.delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 MainActivity.deleteRandomEventFromDB(id);
