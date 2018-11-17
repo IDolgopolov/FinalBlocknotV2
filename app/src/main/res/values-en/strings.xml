@@ -10,7 +10,9 @@
     <string name="three">\u00203</string>
     <string name="four">\u00204</string>
     <string name="five">\u00205</string>
-    <string name="question_delete_all">Delete all?</string>
+    <string name="question_delete_all">Delete event?</string>
     <string name="delete">Delete</string>
     <string name="save">Save</string>
+    <string name="past">history</string>
+    <string name="past_there">past events</string>
 </resources>

@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 
 import com.arproject.finalblocknot.data.DBEDHelper;
 import com.arproject.finalblocknot.data.DBHelper;
+import com.arproject.finalblocknot.dialog.PastEverydayDialog;
 import com.arproject.finalblocknot.dialog.RandomEventsDialog;
 import com.arproject.finalblocknot.fragment.EverydayEventsFragment_v3;
 import com.arproject.finalblocknot.fragment.RandomEventsFragment;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity  {
     public static FragmentManager sFragmentManager;
     public final static String TAG_CREATE_EVENT = "dialog_for_creating";
     public final static String TAG_EDITING_EVENT = "dialog_for_editing";
+    public final static String TAG_EDITING_PAST = "dialog_for_editing_past";
     public int displayHeight, displayWidth;
     private boolean generateEEFV2 = false;
 
@@ -133,8 +135,8 @@ public class MainActivity extends AppCompatActivity  {
         dialog.show(sFragmentManager, TAG_EDITING_EVENT);
     }
 
-    public static void addEDInDB(String text, String date, String position) {
-        dbED.addEDInformation(text, date, position);
+    public static void addEDInDB(String text, String date, String position, int sumDate) {
+        dbED.addEDInformation(text, date, position, sumDate);
     }
     public static void updateED(String text, String date, String position) {
         dbED.updateEDInformation(text, date, position);
@@ -148,6 +150,18 @@ public class MainActivity extends AppCompatActivity  {
         dbED.deleteAllEDInformation();
     }
 
+    public static void openDialogForEditingPastEvent(String txt, String date) {
+        RandomEventsDialog dialog = new RandomEventsDialog();
+        Bundle args = new Bundle();
+        args.putString("TEXT", txt);
+        args.putString("DATE", date);
+        dialog.setArguments(args);
+        dialog.show(sFragmentManager, TAG_EDITING_PAST);
+    }
+    public static void updatePastED(String text, String date, String newText) {
+        dbED.updatePastEDInformation(text, date, newText);
+        PastEverydayDialog.updateList();
+    }
 
 }
 

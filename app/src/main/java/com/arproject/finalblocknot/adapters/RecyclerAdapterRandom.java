@@ -1,12 +1,9 @@
 package com.arproject.finalblocknot.adapters;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,16 +12,18 @@ import com.arproject.finalblocknot.MainActivity;
 import com.arproject.finalblocknot.OneRandomEvent;
 import com.arproject.finalblocknot.R;
 import com.arproject.finalblocknot.dialog.RandomEventsDeleteDialog;
-import com.arproject.finalblocknot.dialog.RandomEventsDialog;
 
 import java.util.ArrayList;
 
 
-public class RecyclerAdapter extends  RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class RecyclerAdapterRandom extends  RecyclerView.Adapter<RecyclerAdapterRandom.ViewHolder> {
     private static ArrayList<OneRandomEvent> eventsList;
+    private static int optionDialog;
 
-    public RecyclerAdapter() {
-                eventsList = MainActivity.db.getAllInformation();
+
+    public RecyclerAdapterRandom(ArrayList<OneRandomEvent> list, int option) {
+                eventsList = list;
+                optionDialog = option;
      }
 
      public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -47,11 +46,13 @@ public class RecyclerAdapter extends  RecyclerView.Adapter<RecyclerAdapter.ViewH
             buttonDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    RandomEventsDeleteDialog dialog = new RandomEventsDeleteDialog();
-                    Bundle args = new Bundle();
-                    args.putInt("ID", ID);
-                    dialog.setArguments(args);
-                    dialog.show(MainActivity.sFragmentManager, "REDelete");
+                        RandomEventsDeleteDialog dialog = new RandomEventsDeleteDialog();
+                        Bundle args = new Bundle();
+                        args.putInt("ID", ID);
+                        args.putInt("OPTION", optionDialog);
+                        dialog.setArguments(args);
+                        dialog.show(MainActivity.sFragmentManager, "REDelete");
+
                 }
             });
 
@@ -66,7 +67,7 @@ public class RecyclerAdapter extends  RecyclerView.Adapter<RecyclerAdapter.ViewH
 
 
     @Override
-    public RecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerAdapterRandom.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RelativeLayout item  = (RelativeLayout) View.inflate(parent.getContext(), R.layout.item_for_recycler_view, null);
 
 
@@ -96,7 +97,7 @@ public class RecyclerAdapter extends  RecyclerView.Adapter<RecyclerAdapter.ViewH
     }
 
     public void updateListEvents() {
-        eventsList = MainActivity.db.getAllInformation();
+            eventsList = MainActivity.db.getAllInformation();
     }
 
 

@@ -12,6 +12,8 @@ import com.arproject.finalblocknot.R;
 
 public class RandomEventsDeleteDialog extends DialogFragment {
     private int id;
+    public static  final int OPTION_RANDOM = 1;
+    public static final int OPTION_EVERYDAY = 2;
 
 
     @NonNull
@@ -27,7 +29,13 @@ public class RandomEventsDeleteDialog extends DialogFragment {
         }).setNegativeButton(R.string.delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                MainActivity.deleteRandomEventFromDB(id);
+               if (getArguments().getInt("OPTION") == OPTION_RANDOM) {
+                   MainActivity.deleteRandomEventFromDB(id);
+               } else if (getArguments().getInt("OPTION") == OPTION_EVERYDAY) {
+                   MainActivity.dbED.deletePastEvent(getArguments().getString("DATE"), getArguments().getString("TEXT"));
+                   PastEverydayDialog.updateList();
+               }
+
             }
         });
 

@@ -9,7 +9,9 @@
     <string name="three">\u00203</string>
     <string name="four">\u00204</string>
     <string name="five">\u00205</string>
-    <string name="question_delete_all">Удалить все?</string>
+    <string name="question_delete_all">Удалить запись?</string>
     <string name="delete">Удалить</string>
     <string name="save">Сохранить</string>
+    <string name="past">история</string>
+    <string name="past_there">прошедшие события</string>
 </resources>

@@ -36,9 +36,5 @@ public class EverydayDeleteAllDialog extends DialogFragment {
         return builder.create();
     }
 
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-
-    }
 
 }

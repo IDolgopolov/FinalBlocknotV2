@@ -11,6 +11,7 @@ public class DBConstants implements BaseColumns {
     public final static int DB_VERSION = 1;
     public final static String IMPORTANCE = "importance";
     public final static String POSITION = "position";
+    public final static String SUM_DATE = "sum_date";
 
     public final static String TABLE_ED_NAME = "everyday_events";
 

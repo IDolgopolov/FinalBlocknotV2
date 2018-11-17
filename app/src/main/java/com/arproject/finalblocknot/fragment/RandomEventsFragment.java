@@ -1,23 +1,23 @@
 package com.arproject.finalblocknot.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.arproject.finalblocknot.ItemREDecoration;
+import com.arproject.finalblocknot.MainActivity;
 import com.arproject.finalblocknot.R;
-import com.arproject.finalblocknot.adapters.RecyclerAdapter;
+import com.arproject.finalblocknot.adapters.RecyclerAdapterRandom;
+import com.arproject.finalblocknot.dialog.RandomEventsDeleteDialog;
 
 public class RandomEventsFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private static RecyclerAdapter adapter;
+    private static RecyclerAdapterRandom adapter;
 
 
     @Override
@@ -29,7 +29,7 @@ public class RandomEventsFragment extends Fragment {
 
         mRecyclerView.addItemDecoration(new ItemREDecoration(12, 15));
 
-        adapter = new RecyclerAdapter();
+        adapter = new RecyclerAdapterRandom(MainActivity.db.getAllInformation(), RandomEventsDeleteDialog.OPTION_RANDOM);
         mRecyclerView.setAdapter(adapter);
 
 

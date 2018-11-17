@@ -2,6 +2,10 @@ package com.arproject.finalblocknot.fragment;
 
 
 import android.app.AlertDialog;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -22,6 +26,7 @@ import android.widget.TextView;
 import com.arproject.finalblocknot.MainActivity;
 import com.arproject.finalblocknot.R;
 import com.arproject.finalblocknot.dialog.EverydayDeleteAllDialog;
+import com.arproject.finalblocknot.dialog.PastEverydayDialog;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -36,6 +41,8 @@ public class EverydayEventsFragment_v3 extends Fragment {
     private ArrayList<TableLayout> arrayTable = new ArrayList<>();
     private LinearLayout layoutParent;
     private FloatingActionButton buttonDeleteAll;
+    private FloatingActionButton buttonPast;
+    private int[] arrDateSum = new int[8];
 
 
 
@@ -83,15 +90,27 @@ public class EverydayEventsFragment_v3 extends Fragment {
         buttonDeleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("delete_all", "click");
                 EverydayDeleteAllDialog dialog = new EverydayDeleteAllDialog();
                 dialog.show(MainActivity.sFragmentManager, "DELETE_ALL_ED");
 
             }
         });
 
+        buttonPast = (FloatingActionButton) layoutParent.findViewById(R.id.fab_past_everyday);
+        buttonPast.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PastEverydayDialog dialog = new PastEverydayDialog();
+                    dialog.show(MainActivity.sFragmentManager, "PAST_EVENT");
+                }
+
+        });
+
 
         setDate();
 
+        final int tablePosition = 0;
         for(int i = 0; i < arrayEditText.size(); i++) {
 
             final EditText editText =  arrayEditText.get(i);
@@ -116,7 +135,7 @@ public class EverydayEventsFragment_v3 extends Fragment {
 
                     if(MainActivity.getEDInformation(date, idPosition) == null) {
                         if(editText.getText().toString().isEmpty()) return;
-                        MainActivity.addEDInDB(charSequence.toString(), date, idPosition);
+                        MainActivity.addEDInDB(charSequence.toString(), date, idPosition, arrDateSum[tablePosition]);
                     } else {
                         MainActivity.updateED(charSequence.toString(), date, idPosition);
                     }
@@ -128,6 +147,32 @@ public class EverydayEventsFragment_v3 extends Fragment {
 
                 }
             });
+            switch (i) {
+                case 4:
+                    tableNumber = 0;
+                    break;
+                case 9:
+                    tableNumber = 1;
+                    break;
+                case  14:
+                    tableNumber = 2;
+                    break;
+                case  19:
+                    tableNumber = 3;
+                    break;
+                case  24:
+                    tableNumber = 4;
+                    break;
+                case  29:
+                    tableNumber = 5;
+                    break;
+                case  34:
+                    tableNumber = 6;
+                    break;
+                case 39:
+                    tableNumber = 7;
+                    break;
+            }
 
         }
 
@@ -144,6 +189,7 @@ public class EverydayEventsFragment_v3 extends Fragment {
         DateFormat df = new SimpleDateFormat("EEE");
         String dayOfWeek = df.format(Calendar.getInstance().getTime());
 
+        arrDateSum[0] =  currentDayOfMonth + currentMonth*100 + currentYear*1000;
         String dateToday =  dayOfWeek + ", " + Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
                 + "." + Integer.toString(currentYear);
         arrayDateTextView.get(0).setText(dateToday);
@@ -163,6 +209,7 @@ public class EverydayEventsFragment_v3 extends Fragment {
             }
             dateToday =  dayOfWeek + ", " +  Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
                     + "." + Integer.toString(currentYear);
+            arrDateSum[i] = currentDayOfMonth + currentMonth + currentYear;
             arrayDateTextView.get(i).setText(dateToday);
         }
     }
@@ -172,4 +219,5 @@ public class EverydayEventsFragment_v3 extends Fragment {
             arrayEditText.get(i).setText("");
         }
     }
+
 }

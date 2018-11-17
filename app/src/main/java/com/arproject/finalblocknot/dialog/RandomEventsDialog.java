@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
+import android.util.Log;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -36,6 +37,12 @@ public class RandomEventsDialog extends DialogFragment {
         if(getTag().equals(MainActivity.TAG_EDITING_EVENT)) {
             textEditView.setText(textForEditing);
         }
+        if( getTag().equals(MainActivity.TAG_EDITING_PAST)) {
+            textForEditing = getArguments().getString("TEXT");
+            textEditView.setText(textForEditing);
+        }
+
+
 
         imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
@@ -64,7 +71,7 @@ public class RandomEventsDialog extends DialogFragment {
         }
         Dialog dialog = builder.create();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-
+        Log.i("delete_all", "hello");
         return dialog;
     }
 
@@ -100,8 +107,11 @@ public class RandomEventsDialog extends DialogFragment {
             if (!txt.isEmpty()) {
                 if(getTag().equals(MainActivity.TAG_CREATE_EVENT)) {
                     MainActivity.addRandomEventInBD(txt, date);
-                } else {
+                } else if(getTag().equals(MainActivity.TAG_EDITING_EVENT)) {
                     MainActivity.updateRandomEvent(txt, idEditingEvent);
+                } else if(getTag().equals(MainActivity.TAG_EDITING_PAST)) {
+                    Bundle args = getArguments();
+                    MainActivity.updatePastED(args.getString("TEXT"), args.getString("DATE"), txt);
                 }
             }
         }

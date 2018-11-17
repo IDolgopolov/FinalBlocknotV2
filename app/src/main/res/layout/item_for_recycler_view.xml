@@ -5,8 +5,8 @@
     android:layout_height = "70dp"
     android:layout_width = "match_parent"
     android:background="@drawable/button_control_circle"
-    android:layout_marginEnd="10dp"
-    android:layout_marginStart="10dp"
+    android:layout_gravity="center_horizontal"
+    android:orientation="horizontal"
     >
 
     <TextView
