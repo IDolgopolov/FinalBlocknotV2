@@ -15,4 +15,5 @@
     <string name="save">Save</string>
     <string name="past">history</string>
     <string name="past_there">past events</string>
+    <string name="today">Today</string>
 </resources>

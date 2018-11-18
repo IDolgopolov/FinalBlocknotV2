@@ -7,7 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.arproject.finalblocknot.MainActivity;
 import com.arproject.finalblocknot.OneRandomEvent;
+import com.arproject.finalblocknot.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -147,6 +149,33 @@ public class DBEDHelper extends SQLiteOpenHelper {
         db.delete(DBConstants.TABLE_ED_NAME, DBConstants.DATE + " = ? AND " + DBConstants.INFORMATION + " = ?",
                 new String[] {date, txt});
 
+    }
+
+    public String getTodayEvent(String date, Context context) {
+        if (db == null) db = this.getWritableDatabase();
+
+        Cursor cursor = db.query(
+                DBConstants.TABLE_ED_NAME,
+                new String[] { DBConstants.DATE, DBConstants.INFORMATION},
+                DBConstants.DATE + " = ?", new String[] {date},
+                null, null, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        } else {
+            Log.e("DB", "error generate cursor");
+        }
+        String info = "";
+        for(int i = 0; i < cursor.getCount(); i++) {
+            if(cursor.isLast()) {
+                info+= cursor.getString(cursor.getColumnIndexOrThrow(DBConstants.INFORMATION));
+            } else {
+                info+= cursor.getString(cursor.getColumnIndexOrThrow(DBConstants.INFORMATION)) + ", ";
+            }
+            cursor.moveToNext();
+        }
+
+        return info;
     }
 
 

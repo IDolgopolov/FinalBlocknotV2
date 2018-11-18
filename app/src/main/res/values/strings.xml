@@ -14,4 +14,5 @@
     <string name="save">Сохранить</string>
     <string name="past">история</string>
     <string name="past_there">прошедшие события</string>
+    <string name="today">Сегодня</string>
 </resources>

@@ -2,6 +2,10 @@ package com.arproject.finalblocknot;
 
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -11,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,6 +28,8 @@ import com.arproject.finalblocknot.dialog.RandomEventsDialog;
 import com.arproject.finalblocknot.fragment.EverydayEventsFragment_v3;
 import com.arproject.finalblocknot.fragment.RandomEventsFragment;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -38,6 +45,7 @@ public class MainActivity extends AppCompatActivity  {
     public final static String TAG_EDITING_PAST = "dialog_for_editing_past";
     public int displayHeight, displayWidth;
     private boolean generateEEFV2 = false;
+    public static final int ALARM_RTC = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +88,9 @@ public class MainActivity extends AppCompatActivity  {
         fragmentTransaction.add(R.id.layout_for_recycler_view, (Fragment) fragmentRandomEvents);
         fragmentTransaction.commit();
         generateEEFV2 = true;
+
+        generateAlarm(8, 0);
+
     }
 
     @Override
@@ -161,6 +172,23 @@ public class MainActivity extends AppCompatActivity  {
     public static void updatePastED(String text, String date, String newText) {
         dbED.updatePastEDInformation(text, date, newText);
         PastEverydayDialog.updateList();
+    }
+
+    public static String getTodayEE(String date, Context context) {
+        return dbED.getTodayEvent(date, context);
+    }
+
+    private void generateAlarm(int hour, int min) {
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Calendar calendar = Calendar.getInstance();
+        //calendar.setTimeInMillis(System.currentTimeMillis());
+        //calendar.set(Calendar.HOUR_OF_DAY, hour, min);
+        Log.i("notification", "generate alarm");
+        Intent intent = new Intent(getApplicationContext(), MyAlarmManager.class);
+        PendingIntent pendingIntent =  PendingIntent.getBroadcast(getApplicationContext(), ALARM_RTC, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, GregorianCalendar.getInstance().getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
 }
