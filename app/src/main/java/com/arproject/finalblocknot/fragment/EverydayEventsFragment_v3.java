@@ -27,6 +27,7 @@ import com.arproject.finalblocknot.MainActivity;
 import com.arproject.finalblocknot.R;
 import com.arproject.finalblocknot.dialog.EverydayDeleteAllDialog;
 import com.arproject.finalblocknot.dialog.PastEverydayDialog;
+import com.arproject.finalblocknot.dialog.PickNotificationDialog;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -43,6 +44,7 @@ public class EverydayEventsFragment_v3 extends Fragment {
     private FloatingActionButton buttonDeleteAll;
     private FloatingActionButton buttonPast;
     private int[] arrDateSum = new int[8];
+    private FloatingActionButton buttonPickNotification;
 
 
 
@@ -105,6 +107,15 @@ public class EverydayEventsFragment_v3 extends Fragment {
                     dialog.show(MainActivity.sFragmentManager, "PAST_EVENT");
                 }
 
+        });
+
+        buttonPickNotification = (FloatingActionButton) layoutParent.findViewById(R.id.fab_pick_notification);
+        buttonPickNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PickNotificationDialog dialog = new PickNotificationDialog();
+                dialog.show(MainActivity.sFragmentManager, "PICK_NOTIFICATION");
+            }
         });
 
 

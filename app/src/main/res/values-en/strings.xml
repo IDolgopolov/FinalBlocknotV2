@@ -16,4 +16,18 @@
     <string name="past">history</string>
     <string name="past_there">past events</string>
     <string name="today">Today</string>
+    <string name="no_events_today">no events</string>
+    <string name="pick_time_notification">Receive notification about today\'s events every: </string>
+    <string-array name="notification_sent_time">
+        <item>never</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>2 hours</item>
+        <item>3 hours</item>
+        <item>4 hours</item>
+        <item>5 hours</item>
+        <item>6 hours</item>
+        <item>only at 6am</item>
+        <item>only at 12am</item>
+    </string-array>
 </resources>

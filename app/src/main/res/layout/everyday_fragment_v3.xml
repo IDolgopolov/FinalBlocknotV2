@@ -1512,7 +1512,19 @@
             android:layout_marginEnd="20dp"
             app:srcCompat="@android:drawable/ic_input_get"
             />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_pick_notification"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="120dp"
+            app:backgroundTint="#e6e6e6"
+            app:fabSize="mini"
+            app:srcCompat="@android:drawable/ic_dialog_dialer"
+            />
     </RelativeLayout>
+
 
 </LinearLayout>
 

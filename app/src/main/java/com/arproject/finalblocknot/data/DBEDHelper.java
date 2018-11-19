@@ -174,6 +174,7 @@ public class DBEDHelper extends SQLiteOpenHelper {
             }
             cursor.moveToNext();
         }
+        if(info.equals("")) info = context.getResources().getString(R.string.no_events_today);
 
         return info;
     }

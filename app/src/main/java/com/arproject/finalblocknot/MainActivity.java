@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity  {
         fragmentTransaction.commit();
         generateEEFV2 = true;
 
-        generateAlarm(8, 0);
+        generateAlarm(8, 0, AlarmManager.INTERVAL_HALF_DAY, getApplicationContext());
 
     }
 
@@ -178,17 +178,36 @@ public class MainActivity extends AppCompatActivity  {
         return dbED.getTodayEvent(date, context);
     }
 
-    private void generateAlarm(int hour, int min) {
-        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+    public static void generateAlarm(int hour, int min, long interval,  Context context) {
+        Log.i("check_not", "alarm hour generate" );
+        AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         Calendar calendar = Calendar.getInstance();
-        //calendar.setTimeInMillis(System.currentTimeMillis());
-        //calendar.set(Calendar.HOUR_OF_DAY, hour, min);
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, hour, min);
         Log.i("notification", "generate alarm");
-        Intent intent = new Intent(getApplicationContext(), MyAlarmManager.class);
-        PendingIntent pendingIntent =  PendingIntent.getBroadcast(getApplicationContext(), ALARM_RTC, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intent = new Intent(context, MyAlarmManager.class);
+        PendingIntent pendingIntent =  PendingIntent.getBroadcast(context, ALARM_RTC, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        manager.setRepeating(AlarmManager.RTC_WAKEUP, GregorianCalendar.getInstance().getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, GregorianCalendar.getInstance().getTimeInMillis(), interval, pendingIntent);
+    }
+    public static void generateAlarm(long interval,  Context context) {
+        Log.i("check_not", "alarm millis generate" );
+        AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+
+        Intent intent = new Intent(context, MyAlarmManager.class);
+        PendingIntent pendingIntent =  PendingIntent.getBroadcast(context, ALARM_RTC, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, GregorianCalendar.getInstance().getTimeInMillis(), interval, pendingIntent);
+    }
+    public static void deleteAllAlarm(Context context) {
+        AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, MyAlarmManager.class);
+        PendingIntent pendingIntent =  PendingIntent.getBroadcast(context, ALARM_RTC, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        manager.cancel(pendingIntent);
     }
 
 }

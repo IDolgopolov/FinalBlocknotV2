@@ -32,7 +32,7 @@ public class MyAlarmManager extends BroadcastReceiver {
         String idChannel = "channel_1";
         Notification notification = new Notification.Builder(context)
                 .setContentTitle(context.getResources().getString(R.string.today) + ": ")
-                .setSmallIcon(R.mipmap.icon_lounch_round)
+                .setSmallIcon(R.drawable.icon_small)
                 .setStyle(new Notification.BigTextStyle()
                         .bigText(MainActivity.getTodayEE(getTodayDate(), context)))
                 .setContentIntent(pendingIntent)
