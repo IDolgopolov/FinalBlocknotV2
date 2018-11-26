@@ -8,9 +8,12 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.arproject.finalblocknot.MainActivity;
 import com.arproject.finalblocknot.R;
@@ -83,9 +86,8 @@ public class RandomEventsDialog extends DialogFragment {
        EditText editText= new EditText(getContext());
         editText.setHeight(160);
         editText.setWidth(60);
-        editText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-        editText.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         editText.setHorizontallyScrolling(false);
+        editText.setInputType( InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_POSTAL_ADDRESS | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         editText.setLines(10);
         editText.setHint(R.string.hint_random_events);
         editText.setPadding(30, 0, 30, 50);
@@ -105,6 +107,7 @@ public class RandomEventsDialog extends DialogFragment {
             String date = df.format(Calendar.getInstance().getTime());
 
             if (!txt.isEmpty()) {
+                Toast.makeText(getContext(), getContext().getResources().getString(R.string.saving_complete), Toast.LENGTH_SHORT).show();
                 if(getTag().equals(MainActivity.TAG_CREATE_EVENT)) {
                     MainActivity.addRandomEventInBD(txt, date);
                 } else if(getTag().equals(MainActivity.TAG_EDITING_EVENT)) {

@@ -6,15 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
 import com.arproject.finalblocknot.OneRandomEvent;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class DBHelper extends SQLiteOpenHelper {
     private final static String FILE_DB_NAME = "random_events.db";
@@ -120,7 +113,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void closeDB() {
-        if (db == null) db.close();
+        if (db != null) db.close();
     }
 
 

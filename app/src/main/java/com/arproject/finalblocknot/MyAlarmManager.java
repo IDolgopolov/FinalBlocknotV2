@@ -18,30 +18,36 @@ import java.util.GregorianCalendar;
 
 
 public class MyAlarmManager extends BroadcastReceiver {
+    private final String idChannel = "CHANEL_1";
+    private final String nameChannel = "events_notification";
 
     @Override
     @SuppressLint("NewAPi")
     public void onReceive(Context context, Intent intent) {
-        Log.i("notification", "onReceive");
+
         Intent intentActivity = new Intent(context, MainActivity.class);
         intentActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, MainActivity.ALARM_RTC, intentActivity, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        String idChannel = "channel_1";
+
+        String txt = MainActivity.getTodayEE(getTodayDate(), context);
         Notification notification = new Notification.Builder(context)
+                .setColor(context.getResources().getColor(R.color.colorAccent))
                 .setContentTitle(context.getResources().getString(R.string.today) + ": ")
                 .setSmallIcon(R.drawable.icon_small)
                 .setStyle(new Notification.BigTextStyle()
-                        .bigText(MainActivity.getTodayEE(getTodayDate(), context)))
+                        .bigText(txt))
+                .setVisibility(Notification.VISIBILITY_PUBLIC)
+                .setContentText(txt)
                 .setContentIntent(pendingIntent)
                 .setChannelId(idChannel)
                 .build();
         NotificationManager notManager = ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE));
 
         if(Build.VERSION.SDK_INT > 24) {
-            NotificationChannel channel = new NotificationChannel(idChannel, "events_notification", NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel = new NotificationChannel(idChannel, nameChannel, NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription("channel_notify_events");
             channel.enableVibration(false);
             notManager.createNotificationChannel(channel);

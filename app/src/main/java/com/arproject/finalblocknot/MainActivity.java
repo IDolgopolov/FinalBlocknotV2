@@ -6,6 +6,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity  {
     public int displayHeight, displayWidth;
     private boolean generateEEFV2 = false;
     public static final int ALARM_RTC = 0;
+    private SharedPreferences sPref;
+    private final String APPLICATION_FIRST_LAUNCH = "apllication_launch";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +92,6 @@ public class MainActivity extends AppCompatActivity  {
         fragmentTransaction.commit();
         generateEEFV2 = true;
 
-        generateAlarm(8, 0, AlarmManager.INTERVAL_HALF_DAY, getApplicationContext());
-
     }
 
     @Override
@@ -115,6 +116,10 @@ public class MainActivity extends AppCompatActivity  {
                     }, 100, TimeUnit.MILLISECONDS);
             generateEEFV2 = false;
         }
+        if(checkFirstLaunch()) {
+            generateAlarm(3 * 60 * 60 * 1000, getApplicationContext());
+        }
+
     }
 
     @Override
@@ -175,12 +180,14 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public static String getTodayEE(String date, Context context) {
+        if (dbED == null) dbED = new DBEDHelper(context);
         return dbED.getTodayEvent(date, context);
     }
 
     public static void generateAlarm(int hour, int min, long interval,  Context context) {
         Log.i("check_not", "alarm hour generate" );
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        deleteAllAlarm(context);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -194,6 +201,7 @@ public class MainActivity extends AppCompatActivity  {
     public static void generateAlarm(long interval,  Context context) {
         Log.i("check_not", "alarm millis generate" );
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        deleteAllAlarm(context);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -204,11 +212,29 @@ public class MainActivity extends AppCompatActivity  {
         manager.setRepeating(AlarmManager.RTC_WAKEUP, GregorianCalendar.getInstance().getTimeInMillis(), interval, pendingIntent);
     }
     public static void deleteAllAlarm(Context context) {
-        AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, MyAlarmManager.class);
-        PendingIntent pendingIntent =  PendingIntent.getBroadcast(context, ALARM_RTC, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        manager.cancel(pendingIntent);
+        try {
+            AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(context, MyAlarmManager.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, ALARM_RTC, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            manager.cancel(pendingIntent);
+            pendingIntent.cancel();
+        } catch(Exception e) {
+            Log.e("notification", "error cancel alarm");
+        }
     }
+
+    private boolean checkFirstLaunch() {
+        sPref  = getPreferences(MODE_PRIVATE);
+        if(sPref.getString(APPLICATION_FIRST_LAUNCH, "def").equals("def")) {
+            SharedPreferences.Editor editor = sPref.edit();
+            editor.putString(APPLICATION_FIRST_LAUNCH, APPLICATION_FIRST_LAUNCH);
+            editor.apply();
+            return true;
+        }
+        return false;
+
+    }
+
 
 }
 

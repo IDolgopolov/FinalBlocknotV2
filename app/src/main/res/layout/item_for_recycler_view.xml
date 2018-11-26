@@ -21,8 +21,8 @@
     android:id="@+id/item_for_recycler_view"/>
 
     <ImageButton
-        android:layout_width="26dp"
-        android:layout_height="26dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="6dp"

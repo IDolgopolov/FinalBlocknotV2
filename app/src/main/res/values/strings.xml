@@ -12,6 +12,7 @@
     <string name="question_delete_all">Удалить запись?</string>
     <string name="delete">Удалить</string>
     <string name="save">Сохранить</string>
+    <string name="saving_complete">Сохранено</string>
     <string name="past">история</string>
     <string name="past_there">прошедшие события</string>
     <string name="today">Сегодня</string>
@@ -19,8 +20,6 @@
     <string name="pick_time_notification">Получать уведомления о событиях на сегодня каждые: </string>
     <string-array name="notification_sent_time">
         <item>никогда</item>
-        <item>30 минут</item>
-        <item>1 час</item>
         <item>2 часа</item>
         <item>3 часа</item>
         <item>4 часа</item>

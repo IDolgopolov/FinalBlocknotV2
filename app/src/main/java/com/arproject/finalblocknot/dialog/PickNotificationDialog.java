@@ -44,7 +44,7 @@ public class PickNotificationDialog extends DialogFragment {
                     changeDate = true;
             }
         });
-        spinner.setSelection(3);
+        spinner.setSelection(2);
 
         return builder.create();
     }
@@ -61,22 +61,18 @@ public class PickNotificationDialog extends DialogFragment {
             if(result.equals(arr[0])) {
                 millis = 0;
             } else if(result.equals(arr[1])) {
-                millis = 30 * 60 * 1000;
-            } else if(result.equals(arr[2])) {
-                millis = 60 * 60 * 1000;
-            } else if(result.equals(arr[3])) {
                 millis = 2 *60 * 60 * 1000;
-            } else if(result.equals(arr[4])) {
+            } else if(result.equals(arr[2])) {
                 millis = 3 * 60 * 60 * 1000;
-            } else if(result.equals(arr[5])) {
+            } else if(result.equals(arr[3])) {
                 millis = 4 * 60 * 60 * 1000;
-            } else if(result.equals(arr[6])) {
+            } else if(result.equals(arr[4])) {
                 millis = 5 * 60 * 60 * 1000;
-            } else if(result.equals(arr[7])) {
+            } else if(result.equals(arr[5])) {
                 millis = 6 * 60 * 60 * 1000;
-            }else if(result.equals(arr[8])) {
+            }else if(result.equals(arr[6])) {
                 hour = 6;
-            }else if(result.equals(arr[9])) {
+            }else if(result.equals(arr[7])) {
                 hour = 12;
             }
             Log.i("check_not", "millis:" + millis );

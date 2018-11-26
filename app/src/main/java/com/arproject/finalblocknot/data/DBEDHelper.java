@@ -28,8 +28,7 @@ public class DBEDHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String DB_PARAMETERS = "CREATE TABLE " + DBConstants.TABLE_ED_NAME +
                 "(" + DBConstants._ID + " INTEGER PRIMARY KEY, " + DBConstants.INFORMATION +
-                " TEXT, " + DBConstants.DATE + " TEXT, " + DBConstants.IMPORTANCE + " INTEGER, "
-                + DBConstants.POSITION + " TEXT, " + DBConstants.SUM_DATE + " INTEGER " +")";
+                " TEXT, " + DBConstants.DATE + " TEXT, " + DBConstants.POSITION + " TEXT, " + DBConstants.SUM_DATE + " INTEGER" +")";
 
         sqLiteDatabase.execSQL(DB_PARAMETERS);
     }
@@ -106,7 +105,7 @@ public class DBEDHelper extends SQLiteOpenHelper {
     }
 
     public void closeDB() {
-        if (db == null) db.close();
+        if (db != null) db.close();
     }
 
     public ArrayList<OneRandomEvent> getPastInformation() {
@@ -114,9 +113,10 @@ public class DBEDHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.query(
                 DBConstants.TABLE_ED_NAME,
-                new String[] { DBConstants.INFORMATION, DBConstants.POSITION, DBConstants.DATE, DBConstants.SUM_DATE},
+                new String[] { DBConstants.INFORMATION, DBConstants.POSITION,DBConstants.SUM_DATE,  DBConstants.DATE },
                 null, null,
-                null, null, null);
+                null, null, null
+        );
 
         if (cursor != null) {
             cursor.moveToFirst();
@@ -129,17 +129,19 @@ public class DBEDHelper extends SQLiteOpenHelper {
         int currentDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         int currentMonth = calendar.get(Calendar.MONTH) + 1; //отсчет месяцев идет с 0
         int currentYear = calendar.get(Calendar.YEAR);
-        int sumDate = currentDayOfMonth + currentMonth * 100 + currentYear * 1000;
+        int sumDate = currentDayOfMonth + currentMonth * 100 + currentYear * 10000;
+        Log.i("past_info", "sumDate today: " + sumDate);
         for(int i = 0; i < cursor.getCount(); i++) {
+            Log.i("past_info", "sumDate all days: " + cursor.getInt(cursor.getColumnIndexOrThrow(DBConstants.SUM_DATE)));
             if(sumDate > cursor.getInt(cursor.getColumnIndexOrThrow(DBConstants.SUM_DATE))) {
                 String txt = cursor.getString(cursor.getColumnIndexOrThrow(DBConstants.INFORMATION));
                 String date = cursor.getString(cursor.getColumnIndexOrThrow(DBConstants.DATE));
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(DBConstants.POSITION));
                 listORE.add(new OneRandomEvent(txt, id, date));
-                cursor.moveToNext();
             }
+            cursor.moveToNext();
         }
-
+        cursor.close();
         return listORE;
 
     }
@@ -175,7 +177,7 @@ public class DBEDHelper extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
         if(info.equals("")) info = context.getResources().getString(R.string.no_events_today);
-
+        cursor.close();
         return info;
     }
 

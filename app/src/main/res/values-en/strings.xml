@@ -17,11 +17,10 @@
     <string name="past_there">past events</string>
     <string name="today">Today</string>
     <string name="no_events_today">no events</string>
+    <string name="saving_complete">saved</string>
     <string name="pick_time_notification">Receive notification about today\'s events every: </string>
     <string-array name="notification_sent_time">
         <item>never</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
         <item>2 hours</item>
         <item>3 hours</item>
         <item>4 hours</item>
