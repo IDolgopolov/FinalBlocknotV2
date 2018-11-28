@@ -179,9 +179,9 @@ public class MainActivity extends AppCompatActivity  {
         PastEverydayDialog.updateList();
     }
 
-    public static String getTodayEE(String date, Context context) {
+    public static String getTodayAndTomorrowEE(String dateToday, String dateTomorrow, Context context) {
         if (dbED == null) dbED = new DBEDHelper(context);
-        return dbED.getTodayEvent(date, context);
+        return dbED.getTodayEndTomorrowEvent(dateToday, dateTomorrow, context);
     }
 
     public static void generateAlarm(int hour, int min, long interval,  Context context) {

@@ -19,6 +19,7 @@
     <string name="no_events_today">no events</string>
     <string name="saving_complete">saved</string>
     <string name="pick_time_notification">Receive notification about today\'s events every: </string>
+    <string name="tomorrow">Tomorrow: </string>
     <string-array name="notification_sent_time">
         <item>never</item>
         <item>2 hours</item>

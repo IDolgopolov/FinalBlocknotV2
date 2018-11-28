@@ -18,6 +18,7 @@
     <string name="today">Сегодня</string>
     <string name="no_events_today">нет событий</string>
     <string name="pick_time_notification">Получать уведомления о событиях на сегодня каждые: </string>
+    <string name="tomorrow">Завтра: </string>
     <string-array name="notification_sent_time">
         <item>никогда</item>
         <item>2 часа</item>

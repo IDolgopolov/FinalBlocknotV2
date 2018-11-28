@@ -32,25 +32,37 @@ public class MyAlarmManager extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, MainActivity.ALARM_RTC, intentActivity, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
-        String txt = MainActivity.getTodayEE(getTodayDate(), context);
-        Notification notification = new Notification.Builder(context)
-                .setColor(context.getResources().getColor(R.color.colorAccent))
-                .setContentTitle(context.getResources().getString(R.string.today) + ": ")
-                .setSmallIcon(R.drawable.icon_small)
-                .setStyle(new Notification.BigTextStyle()
-                        .bigText(txt))
-                .setVisibility(Notification.VISIBILITY_PUBLIC)
-                .setContentText(txt)
-                .setContentIntent(pendingIntent)
-                .setChannelId(idChannel)
-                .build();
+        String txt = MainActivity.getTodayAndTomorrowEE(getTodayDate(), getTomorrowDate(), context);
         NotificationManager notManager = ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE));
 
+        Notification notification;
         if(Build.VERSION.SDK_INT > 24) {
+             notification = new Notification.Builder(context)
+                    .setColor(context.getResources().getColor(R.color.colorAccent))
+                    .setContentTitle(context.getResources().getString(R.string.today) + ": ")
+                    .setSmallIcon(R.drawable.icon_small)
+                    .setStyle(new Notification.BigTextStyle()
+                            .bigText(txt))
+                    .setVisibility(Notification.VISIBILITY_PUBLIC)
+                    .setContentText(txt)
+                    .setContentIntent(pendingIntent)
+                    .setChannelId(idChannel)
+                    .build();
+
             NotificationChannel channel = new NotificationChannel(idChannel, nameChannel, NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription("channel_notify_events");
             channel.enableVibration(false);
             notManager.createNotificationChannel(channel);
+
+        } else {
+              notification = new Notification.Builder(context)
+                    .setContentTitle(context.getResources().getString(R.string.today) + ": ")
+                    .setSmallIcon(R.drawable.icon_small)
+                    .setStyle(new Notification.BigTextStyle()
+                            .bigText(txt))
+                    .setContentText(txt)
+                    .setContentIntent(pendingIntent)
+                    .build();
         }
 
         notManager.notify(MainActivity.ALARM_RTC, notification);
@@ -65,6 +77,20 @@ public class MyAlarmManager extends BroadcastReceiver {
         int currentYear = calendar.get(Calendar.YEAR);
         DateFormat df = new SimpleDateFormat("EEE");
         String dayOfWeek = df.format(Calendar.getInstance().getTime());
+        String dateToday =  dayOfWeek + ", " + Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
+                + "." + Integer.toString(currentYear);
+        return dateToday;
+    }
+
+    private String getTomorrowDate() {
+        Calendar calendar = new GregorianCalendar();
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+
+        int currentDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        int currentMonth = calendar.get(Calendar.MONTH) + 1; //отсчет месяцев идет с 0
+        int currentYear = calendar.get(Calendar.YEAR);
+        DateFormat df = new SimpleDateFormat("EEE");
+        String dayOfWeek = df.format(calendar.getTime());
         String dateToday =  dayOfWeek + ", " + Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
                 + "." + Integer.toString(currentYear);
         return dateToday;

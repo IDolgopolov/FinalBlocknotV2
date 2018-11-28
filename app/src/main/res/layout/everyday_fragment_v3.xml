@@ -13,369 +13,366 @@
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         >
-    <TableLayout
-        android:id="@+id/table_0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/dialog_holo_light_frame"
-        android:padding="2dp"
-        android:stretchColumns="2"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="10dp"
-        >
+        <TableLayout
+            android:id="@+id/table_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:padding="2dp"
+            android:stretchColumns="2">
 
-        <TableRow
-            android:layout_marginBottom="1dp"
-            android:background="#a0a50d">
+            <TableRow
+                android:layout_marginBottom="1dp"
+                android:background="#a0a50d">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="15dp"
-                android:layout_span="2"
-                android:paddingStart="5dp"
-                android:layout_marginBottom="2dp"
-                android:layout_gravity="center_vertical"
-                android:textSize="12sp"
-                android:textStyle="bold|italic"
-                android:typeface="serif"/>
-        </TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="2dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="15dp"
+                    android:layout_span="2"
+                    android:paddingStart="5dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold|italic"
+                    android:typeface="serif"/>
+            </TableRow>
 
-        <TableRow
-            android:layout_marginBottom="1dp"
-            android:background="#eeebc2"
-            >
+            <TableRow
+                android:layout_marginBottom="1dp"
+                android:background="#eeebc2">
 
-            <TextView
-                android:layout_width="6dp"
-                android:textSize="9sp"
-                android:layout_marginTop="-9dp"
-                android:layout_marginStart="1dp"
-                android:includeFontPadding="false"
-                android:layout_height="25dp"
-                android:layout_column="0"
-                android:layout_gravity="center_vertical"
-                android:text="@string/one"
-                />
+                <TextView
+                    android:layout_width="6dp"
+                    android:textSize="9sp"
+                    android:layout_marginTop="-9dp"
+                    android:layout_marginStart="1dp"
+                    android:includeFontPadding="false"
+                    android:layout_height="25dp"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/one"
+                    />
 
-            <EditText
-                android:id="@+id/e0_0"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_column="1"
-                android:typeface="serif"
-                android:textStyle="italic"
-                android:background="@android:color/transparent"
-                android:inputType="textAutoCorrect|textNoSuggestions"
-                android:paddingBottom="0dp"
-                android:paddingStart="3dp"
-                android:paddingEnd="3dp"
-                android:textSize="12sp" />
+                <EditText
+                    android:id="@+id/e0_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_column="1"
+                    android:typeface="serif"
+                    android:textStyle="italic"
+                    android:background="@android:color/transparent"
+                    android:inputType="textAutoCorrect|textNoSuggestions"
+                    android:paddingBottom="0dp"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:textSize="13sp"/>
+            </TableRow>
 
-        </TableRow>
+            <TableRow
+                android:layout_marginBottom="1dp"
+                android:background="#eeebc2">
 
-        <TableRow
-            android:layout_marginBottom="1dp"
-            android:background="#eeebc2">
+                <TextView
+                    android:layout_width="6dp"
+                    android:textSize="9sp"
+                    android:layout_marginTop="-9dp"
+                    android:layout_marginStart="1dp"
+                    android:includeFontPadding="false"
+                    android:layout_height="25dp"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/two"
+                    />
 
-            <TextView
-                android:layout_width="6dp"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="-9dp"
-                android:minWidth="30dp"
-                android:text="@string/two"
-                android:includeFontPadding="false"
-                android:textSize="9sp" />
+                <EditText
+                    android:id="@+id/e0_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_column="1"
+                    android:typeface="serif"
+                    android:textStyle="italic"
+                    android:background="@android:color/transparent"
+                    android:inputType="textAutoCorrect|textNoSuggestions"
+                    android:paddingBottom="0dp"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:textSize="13sp"/>
+            </TableRow>
 
-            <EditText
-                android:id="@+id/e0_1"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_column="1"
-                android:typeface="serif"
-                android:textStyle="italic"
-                android:background="@android:color/transparent"
-                android:inputType="textAutoCorrect|textNoSuggestions"
-                android:paddingBottom="0dp"
-                android:paddingStart="3dp"
-                android:paddingEnd="3dp"
-                android:textSize="12sp"/>
-        </TableRow>
+            <TableRow
+                android:layout_marginBottom="1dp"
+                android:background="#eeebc2">
 
-        <TableRow
-            android:layout_marginBottom="1dp"
-            android:background="#eeebc2">
+                <TextView
+                    android:layout_width="6dp"
+                    android:textSize="9sp"
+                    android:layout_marginTop="-9dp"
+                    android:layout_marginStart="1dp"
+                    android:includeFontPadding="false"
+                    android:layout_height="25dp"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/three"
+                    />
 
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="6dp"
-                android:textSize="9sp"
-                android:layout_marginTop="-9dp"
-                android:layout_marginStart="1dp"
-                android:layout_gravity="center_vertical"
-                android:layout_column="0"
-                android:includeFontPadding="false"
-                android:minWidth="30dp"
-                android:text="@string/three" />
+                <EditText
+                    android:id="@+id/e0_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_column="1"
+                    android:typeface="serif"
+                    android:textStyle="italic"
+                    android:background="@android:color/transparent"
+                    android:inputType="textAutoCorrect|textNoSuggestions"
+                    android:paddingBottom="0dp"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:textSize="13sp"/>
+            </TableRow>
 
-            <EditText
-                android:id="@+id/e0_2"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_column="1"
-                android:typeface="serif"
-                android:textStyle="italic"
-                android:background="@android:color/transparent"
-                android:inputType="textAutoCorrect|textNoSuggestions"
-                android:paddingBottom="0dp"
-                android:paddingStart="3dp"
-                android:paddingEnd="3dp"
-                android:textSize="12sp"/>
-        </TableRow>
+            <TableRow
+                android:layout_marginBottom="1dp"
+                android:background="#eeebc2">
 
-        <TableRow
-            android:layout_marginBottom="1dp"
-            android:background="#eeebc2">
+                <TextView
+                    android:layout_width="6dp"
+                    android:textSize="9sp"
+                    android:layout_marginTop="-9dp"
+                    android:layout_marginStart="1dp"
+                    android:includeFontPadding="false"
+                    android:layout_height="25dp"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/four"
+                    />
 
-            <TextView
-                android:layout_width="6dp"
-                android:layout_height="wrap_content"
-                android:layout_column="0"
-                android:layout_gravity="center_vertical"
-                android:textSize="9sp"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="-9dp"
-                android:includeFontPadding="false"
-                android:text="@string/four" />
+                <EditText
+                    android:id="@+id/e0_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_column="1"
+                    android:typeface="serif"
+                    android:textStyle="italic"
+                    android:background="@android:color/transparent"
+                    android:inputType="textAutoCorrect|textNoSuggestions"
+                    android:paddingBottom="0dp"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:textSize="13sp"/>
+            </TableRow>
 
-            <EditText
-                android:id="@+id/e0_3"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_column="1"
-                android:typeface="serif"
-                android:textStyle="italic"
-                android:background="@android:color/transparent"
-                android:inputType="textAutoCorrect|textNoSuggestions"
-                android:paddingBottom="0dp"
-                android:paddingStart="3dp"
-                android:paddingEnd="3dp"
-                android:textSize="12sp"/>
-        </TableRow>
+            <TableRow android:background="#eeebc2">
 
-        <TableRow android:background="#eeebc2">
+                <TextView
+                    android:layout_width="6dp"
+                    android:textSize="9sp"
+                    android:layout_marginTop="-9dp"
+                    android:layout_marginStart="1dp"
+                    android:includeFontPadding="false"
+                    android:layout_height="25dp"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/five"
+                    />
 
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="6dp"
-                android:textSize="9sp"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="-9dp"
-                android:layout_gravity="center_vertical"
-                android:layout_column="0"
-                android:text="@string/five"
-                android:includeFontPadding="false"/>
-
-            <EditText
-                android:id="@+id/e0_4"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_column="1"
-                android:typeface="serif"
-                android:textStyle="italic"
-                android:background="@android:color/transparent"
-                android:inputType="textAutoCorrect|textNoSuggestions"
-                android:paddingBottom="0dp"
-                android:paddingStart="3dp"
-                android:paddingEnd="3dp"
-                android:textSize="12sp"/>
-        </TableRow>
+                <EditText
+                    android:id="@+id/e0_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_column="1"
+                    android:typeface="serif"
+                    android:textStyle="italic"
+                    android:background="@android:color/transparent"
+                    android:inputType="textAutoCorrect|textNoSuggestions"
+                    android:paddingBottom="0dp"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:textSize="13sp"/>
+            </TableRow>
+        </TableLayout>
 
 
-    </TableLayout>
+        <TableLayout
+            android:id="@+id/table_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:padding="2dp"
+            android:stretchColumns="2">
 
-    <TableLayout
-        android:id="@+id/table_1"
-        android:background="@android:drawable/dialog_holo_light_frame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="2dp"
-        android:stretchColumns="2"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="10dp"
-        >
+            <TableRow
+                android:layout_marginBottom="1dp"
+                android:background="#a0a50d">
 
-        <TableRow
-            android:layout_marginBottom="1dp"
-            android:background="#a0a50d">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="2dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="15dp"
+                    android:layout_span="2"
+                    android:paddingStart="5dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold|italic"
+                    android:typeface="serif"/>
+            </TableRow>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_marginBottom="2dp"
-                android:layout_height="15dp"
-                android:layout_span="2"
-                android:paddingStart="5dp"
-                android:layout_gravity="center_vertical"
-                android:textSize="12sp"
-                android:textStyle="bold|italic"
-                android:typeface="serif"/>
-        </TableRow>
+            <TableRow
+                android:layout_marginBottom="1dp"
+                android:background="#eeebc2">
 
-        <TableRow
-            android:layout_marginBottom="1dp"
-            android:background="#eeebc2">
+                <TextView
+                    android:layout_width="6dp"
+                    android:textSize="9sp"
+                    android:layout_marginTop="-9dp"
+                    android:layout_marginStart="1dp"
+                    android:includeFontPadding="false"
+                    android:layout_height="25dp"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/one"
+                    />
 
-            <TextView
-                android:layout_width="6dp"
-                android:textSize="9sp"
-                android:layout_marginTop="-9dp"
-                android:layout_marginStart="1dp"
-                android:includeFontPadding="false"
-                android:layout_height="25dp"
-                android:layout_column="0"
-                android:layout_gravity="center_vertical"
-                android:text="@string/one"
-                />
+                <EditText
+                    android:id="@+id/e1_0"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_column="1"
+                    android:typeface="serif"
+                    android:textStyle="italic"
+                    android:background="@android:color/transparent"
+                    android:inputType="textAutoCorrect|textNoSuggestions"
+                    android:paddingBottom="0dp"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:textSize="13sp"/>
+            </TableRow>
 
-            <EditText
-                android:id="@+id/e1_0"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_column="1"
-                android:typeface="serif"
-                android:textStyle="italic"
-                android:background="@android:color/transparent"
-                android:inputType="textAutoCorrect|textNoSuggestions"
-                android:paddingBottom="0dp"
-                android:paddingStart="3dp"
-                android:paddingEnd="3dp"
-                android:textSize="12sp"/>
-        </TableRow>
+            <TableRow
+                android:layout_marginBottom="1dp"
+                android:background="#eeebc2">
 
-        <TableRow
-            android:layout_marginBottom="1dp"
-            android:background="#eeebc2">
+                <TextView
+                    android:layout_width="6dp"
+                    android:textSize="9sp"
+                    android:layout_marginTop="-9dp"
+                    android:layout_marginStart="1dp"
+                    android:includeFontPadding="false"
+                    android:layout_height="25dp"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/two"
+                    />
 
-            <TextView
-                android:layout_width="6dp"
-                android:textSize="9sp"
-                android:layout_marginTop="-9dp"
-                android:layout_marginStart="1dp"
-                android:includeFontPadding="false"
-                android:layout_height="25dp"
-                android:layout_column="0"
-                android:layout_gravity="center_vertical"
-                android:text="@string/two"
-                />
+                <EditText
+                    android:id="@+id/e1_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_column="1"
+                    android:typeface="serif"
+                    android:textStyle="italic"
+                    android:background="@android:color/transparent"
+                    android:inputType="textAutoCorrect|textNoSuggestions"
+                    android:paddingBottom="0dp"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:textSize="13sp"/>
+            </TableRow>
 
-            <EditText
-                android:id="@+id/e1_1"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_column="1"
-                android:typeface="serif"
-                android:textStyle="italic"
-                android:background="@android:color/transparent"
-                android:inputType="textAutoCorrect|textNoSuggestions"
-                android:paddingBottom="0dp"
-                android:paddingStart="3dp"
-                android:paddingEnd="3dp"
-                android:textSize="12sp"/>
-        </TableRow>
+            <TableRow
+                android:layout_marginBottom="1dp"
+                android:background="#eeebc2">
 
-        <TableRow
-            android:layout_marginBottom="1dp"
-            android:background="#eeebc2">
+                <TextView
+                    android:layout_width="6dp"
+                    android:textSize="9sp"
+                    android:layout_marginTop="-9dp"
+                    android:layout_marginStart="1dp"
+                    android:includeFontPadding="false"
+                    android:layout_height="25dp"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/three"
+                    />
 
-            <TextView
-                android:layout_width="6dp"
-                android:textSize="9sp"
-                android:layout_marginTop="-9dp"
-                android:layout_marginStart="1dp"
-                android:includeFontPadding="false"
-                android:layout_height="25dp"
-                android:layout_column="0"
-                android:layout_gravity="center_vertical"
-                android:text="@string/three"
-                />
+                <EditText
+                    android:id="@+id/e1_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_column="1"
+                    android:typeface="serif"
+                    android:textStyle="italic"
+                    android:background="@android:color/transparent"
+                    android:inputType="textAutoCorrect|textNoSuggestions"
+                    android:paddingBottom="0dp"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:textSize="13sp"/>
+            </TableRow>
 
-            <EditText
-                android:id="@+id/e1_2"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_column="1"
-                android:typeface="serif"
-                android:textStyle="italic"
-                android:background="@android:color/transparent"
-                android:inputType="textAutoCorrect|textNoSuggestions"
-                android:paddingBottom="0dp"
-                android:paddingStart="3dp"
-                android:paddingEnd="3dp"
-                android:textSize="12sp"/>
-        </TableRow>
+            <TableRow
+                android:layout_marginBottom="1dp"
+                android:background="#eeebc2">
 
-        <TableRow
-            android:layout_marginBottom="1dp"
-            android:background="#eeebc2">
+                <TextView
+                    android:layout_width="6dp"
+                    android:textSize="9sp"
+                    android:layout_marginTop="-9dp"
+                    android:layout_marginStart="1dp"
+                    android:includeFontPadding="false"
+                    android:layout_height="25dp"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/four"
+                    />
 
-            <TextView
-                android:layout_width="6dp"
-                android:textSize="9sp"
-                android:layout_marginTop="-9dp"
-                android:layout_marginStart="1dp"
-                android:includeFontPadding="false"
-                android:layout_height="25dp"
-                android:layout_column="0"
-                android:layout_gravity="center_vertical"
-                android:text="@string/four"
-                />
+                <EditText
+                    android:id="@+id/e1_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_column="1"
+                    android:typeface="serif"
+                    android:textStyle="italic"
+                    android:background="@android:color/transparent"
+                    android:inputType="textAutoCorrect|textNoSuggestions"
+                    android:paddingBottom="0dp"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:textSize="13sp"/>
+            </TableRow>
 
-            <EditText
-                android:id="@+id/e1_3"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_column="1"
-                android:typeface="serif"
-                android:textStyle="italic"
-                android:background="@android:color/transparent"
-                android:inputType="textAutoCorrect|textNoSuggestions"
-                android:paddingBottom="0dp"
-                android:paddingStart="3dp"
-                android:paddingEnd="3dp"
-                android:textSize="12sp"/>
-        </TableRow>
+            <TableRow android:background="#eeebc2">
 
-        <TableRow android:background="#eeebc2">
+                <TextView
+                    android:layout_width="6dp"
+                    android:textSize="9sp"
+                    android:layout_marginTop="-9dp"
+                    android:layout_marginStart="1dp"
+                    android:includeFontPadding="false"
+                    android:layout_height="25dp"
+                    android:layout_column="0"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/five"
+                    />
 
-            <TextView
-                android:layout_width="6dp"
-                android:textSize="9sp"
-                android:layout_marginTop="-9dp"
-                android:layout_marginStart="1dp"
-                android:includeFontPadding="false"
-                android:layout_height="25dp"
-                android:layout_column="0"
-                android:layout_gravity="center_vertical"
-                android:text="@string/five"
-                />
-
-            <EditText
-                android:id="@+id/e1_4"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_column="1"
-                android:typeface="serif"
-                android:textStyle="italic"
-                android:background="@android:color/transparent"
-                android:inputType="textAutoCorrect|textNoSuggestions"
-                android:paddingBottom="0dp"
-                android:paddingStart="3dp"
-                android:paddingEnd="3dp"
-                android:textSize="12sp"/>
-        </TableRow>
-    </TableLayout>
+                <EditText
+                    android:id="@+id/e1_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_column="1"
+                    android:typeface="serif"
+                    android:textStyle="italic"
+                    android:background="@android:color/transparent"
+                    android:inputType="textAutoCorrect|textNoSuggestions"
+                    android:paddingBottom="0dp"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:textSize="13sp"/>
+            </TableRow>
+        </TableLayout>
     </LinearLayout>
 
 
@@ -438,7 +435,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow
@@ -469,7 +466,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow
@@ -500,7 +497,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow
@@ -531,7 +528,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow android:background="#eeebc2">
@@ -560,7 +557,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
     </TableLayout>
 
@@ -618,7 +615,7 @@
                     android:paddingBottom="0dp"
                     android:paddingStart="3dp"
                     android:paddingEnd="3dp"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
             </TableRow>
 
             <TableRow
@@ -649,7 +646,7 @@
                     android:paddingBottom="0dp"
                     android:paddingStart="3dp"
                     android:paddingEnd="3dp"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
             </TableRow>
 
             <TableRow
@@ -680,7 +677,7 @@
                     android:paddingBottom="0dp"
                     android:paddingStart="3dp"
                     android:paddingEnd="3dp"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
             </TableRow>
 
             <TableRow
@@ -711,7 +708,7 @@
                     android:paddingBottom="0dp"
                     android:paddingStart="3dp"
                     android:paddingEnd="3dp"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
             </TableRow>
 
             <TableRow android:background="#eeebc2">
@@ -740,7 +737,7 @@
                     android:paddingBottom="0dp"
                     android:paddingStart="3dp"
                     android:paddingEnd="3dp"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
             </TableRow>
         </TableLayout>
     </LinearLayout>
@@ -805,7 +802,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow
@@ -836,7 +833,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow
@@ -867,7 +864,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow
@@ -898,7 +895,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow android:background="#eeebc2">
@@ -927,7 +924,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
     </TableLayout>
 
@@ -985,7 +982,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow
@@ -1016,7 +1013,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow
@@ -1047,7 +1044,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow
@@ -1078,7 +1075,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow android:background="#eeebc2">
@@ -1107,7 +1104,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
     </TableLayout>
     </LinearLayout>
@@ -1173,7 +1170,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow
@@ -1202,7 +1199,7 @@
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
                 android:paddingBottom="0dp"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 android:textStyle="italic"
                 android:typeface="serif" />
         </TableRow>
@@ -1235,7 +1232,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow
@@ -1266,7 +1263,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
 
         <TableRow android:background="#eeebc2">
@@ -1295,7 +1292,7 @@
                 android:paddingBottom="0dp"
                 android:paddingStart="3dp"
                 android:paddingEnd="3dp"
-                android:textSize="12sp"/>
+                android:textSize="13sp"/>
         </TableRow>
     </TableLayout>
 
@@ -1353,7 +1350,7 @@
                     android:paddingBottom="0dp"
                     android:paddingStart="3dp"
                     android:paddingEnd="3dp"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
             </TableRow>
 
             <TableRow
@@ -1384,7 +1381,7 @@
                     android:paddingBottom="0dp"
                     android:paddingStart="3dp"
                     android:paddingEnd="3dp"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
             </TableRow>
 
             <TableRow
@@ -1415,7 +1412,7 @@
                     android:paddingBottom="0dp"
                     android:paddingStart="3dp"
                     android:paddingEnd="3dp"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
             </TableRow>
 
             <TableRow
@@ -1446,7 +1443,7 @@
                     android:paddingBottom="0dp"
                     android:paddingStart="3dp"
                     android:paddingEnd="3dp"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
             </TableRow>
 
             <TableRow android:background="#eeebc2">
@@ -1475,7 +1472,7 @@
                     android:paddingBottom="0dp"
                     android:paddingStart="3dp"
                     android:paddingEnd="3dp"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
             </TableRow>
         </TableLayout>
 
