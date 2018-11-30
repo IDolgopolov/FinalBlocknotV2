@@ -114,7 +114,7 @@ public class RandomEventsDialog extends DialogFragment {
                     MainActivity.updateRandomEvent(txt, idEditingEvent);
                 } else if(getTag().equals(MainActivity.TAG_EDITING_PAST)) {
                     Bundle args = getArguments();
-                    MainActivity.updatePastED(args.getString("TEXT"), args.getString("DATE"), txt);
+                    MainActivity.updatePastED(args.getString("TEXT"), args.getString("DATE"), txt, getArguments().getString("POSITION"));
                 }
             }
         }

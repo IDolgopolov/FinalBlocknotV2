@@ -32,7 +32,8 @@ public class RecyclerAdapterPast extends RecyclerView.Adapter<RecyclerAdapterPas
         private TextView textView;
         private TextView dateView;
         private ImageButton buttonDelete;
-        private int ID;
+        private int pos;
+
         private String trueText;
 
         public ViewHolder(RelativeLayout item) {
@@ -52,6 +53,7 @@ public class RecyclerAdapterPast extends RecyclerView.Adapter<RecyclerAdapterPas
                     args.putInt("OPTION", optionDialog);
                     args.putString("DATE", dateView.getText().toString());
                     args.putString("TEXT", textView.getText().toString());
+                    args.putInt("POSITION", pos);
                     dialog.setArguments(args);
                     dialog.show(MainActivity.sFragmentManager, "PastDelete");
 
@@ -61,7 +63,7 @@ public class RecyclerAdapterPast extends RecyclerView.Adapter<RecyclerAdapterPas
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.openDialogForEditingPastEvent(trueText, dateView.getText().toString());
+                    MainActivity.openDialogForEditingPastEvent(trueText, dateView.getText().toString(), Integer.toString(pos));
                 }
             });
         }
@@ -87,7 +89,7 @@ public class RecyclerAdapterPast extends RecyclerView.Adapter<RecyclerAdapterPas
             text = text.substring(0, 50) + "...";
         }
         holder.textView.setText(text);
-        holder.ID = eventsList.get(position).ID;
+        holder.pos = eventsList.get(position).pos;
         String date = eventsList.get(position).date;
         holder.dateView.setText(date);
     }

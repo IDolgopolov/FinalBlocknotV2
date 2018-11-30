@@ -47,7 +47,7 @@ public class EverydayEventsFragment_v3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         final int widthTl = (int) Math.round(getArguments().getInt("width") * 0.46);
-        final int heightRow = (int) Math.round(getArguments().getInt("height") * 0.04);
+        final int heightRow = (int) Math.round(getArguments().getInt("height") * 0.05);
         layoutParent = (LinearLayout) inflater.inflate(R.layout.everyday_fragment_v3, null);
 
         for (int i = 0; i < layoutParent.getChildCount() - 1; i++) {

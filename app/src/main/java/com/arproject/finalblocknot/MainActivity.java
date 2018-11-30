@@ -115,7 +115,9 @@ public class MainActivity extends AppCompatActivity  {
                         }
                     }, 100, TimeUnit.MILLISECONDS);
             generateEEFV2 = false;
+
         }
+
         if(checkFirstLaunch()) {
             generateAlarm(3 * 60 * 60 * 1000, getApplicationContext());
         }
@@ -124,10 +126,13 @@ public class MainActivity extends AppCompatActivity  {
 
     @Override
     protected void onDestroy() {
+        dbED.close();
+        db.close();
+
         super.onDestroy();
 
-        dbED.closeDB();
-        db.closeDB();
+
+
     }
 
     public static void addRandomEventInBD(String txt, String date) {
@@ -166,16 +171,17 @@ public class MainActivity extends AppCompatActivity  {
         dbED.deleteAllEDInformation();
     }
 
-    public static void openDialogForEditingPastEvent(String txt, String date) {
+    public static void openDialogForEditingPastEvent(String txt, String date, String pos) {
         RandomEventsDialog dialog = new RandomEventsDialog();
         Bundle args = new Bundle();
         args.putString("TEXT", txt);
+        args.putString("POSITION", pos);
         args.putString("DATE", date);
         dialog.setArguments(args);
         dialog.show(sFragmentManager, TAG_EDITING_PAST);
     }
-    public static void updatePastED(String text, String date, String newText) {
-        dbED.updatePastEDInformation(text, date, newText);
+    public static void updatePastED(String text, String date, String newText, String pos) {
+        dbED.updatePastEDInformation(text, date, newText, pos);
         PastEverydayDialog.updateList();
     }
 

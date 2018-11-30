@@ -32,7 +32,8 @@ public class RandomEventsDeleteDialog extends DialogFragment {
                if (getArguments().getInt("OPTION") == OPTION_RANDOM) {
                    MainActivity.deleteRandomEventFromDB(id);
                } else if (getArguments().getInt("OPTION") == OPTION_EVERYDAY) {
-                   MainActivity.dbED.deletePastEvent(getArguments().getString("DATE"), getArguments().getString("TEXT"));
+                   MainActivity.dbED.deletePastEvent(getArguments().getString("DATE"), getArguments().getString("TEXT"),
+                           getArguments().getInt("POSITION"));
                    PastEverydayDialog.updateList();
                }
 

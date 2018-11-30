@@ -9,22 +9,16 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-
 import com.arproject.finalblocknot.MainActivity;
 import com.arproject.finalblocknot.R;
-import com.arproject.finalblocknot.fragment.EverydayEventsFragment_v3;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public class PickNotificationDialog extends DialogFragment {
     private boolean changeDate= false;
     private Spinner spinner;
-    private String result;
 
 
     @NonNull
@@ -75,8 +69,7 @@ public class PickNotificationDialog extends DialogFragment {
             }else if(result.equals(arr[7])) {
                 hour = 12;
             }
-            Log.i("check_not", "millis:" + millis );
-            Log.i("check_not", "hour" + hour);
+
             if(millis != 0 ) {
                 MainActivity.generateAlarm(millis, getContext());
             } else if (hour != 0) {

@@ -85,7 +85,7 @@ public class RecyclerAdapterRandom extends  RecyclerView.Adapter<RecyclerAdapter
             text = text.substring(0, 50) + "...";
         }
         holder.textView.setText(text);
-        holder.ID = eventsList.get(position).ID;
+        holder.ID = eventsList.get(position).pos;
         String date = eventsList.get(position).date;
         holder.dateView.setText(date);
     }

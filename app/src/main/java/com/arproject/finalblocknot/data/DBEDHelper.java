@@ -39,7 +39,7 @@ public class DBEDHelper extends SQLiteOpenHelper {
     }
 
     public void addEDInformation(String txt, String date, String position, int sumDate) {
-        if (db == null) db = this.getWritableDatabase();
+        if (!db.isOpen()) db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(DBConstants.INFORMATION, txt);
@@ -51,7 +51,7 @@ public class DBEDHelper extends SQLiteOpenHelper {
     }
 
     public void updateEDInformation(String text, String date, String position) {
-        if (db == null) db = this.getWritableDatabase();
+        if (!db.isOpen()) db = this.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
         cv.put(DBConstants.INFORMATION, text);
@@ -60,19 +60,19 @@ public class DBEDHelper extends SQLiteOpenHelper {
                 + " AND " + DBConstants.POSITION + " = ?", new String[] {date, position});
 
     }
-    public void updatePastEDInformation(String text, String date, String newText) {
-        if (db == null) db = this.getWritableDatabase();
+    public void updatePastEDInformation(String text, String date, String newText, String pos) {
+        if (!db.isOpen()) db = this.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
         cv.put(DBConstants.INFORMATION, newText);
 
         db.update(DBConstants.TABLE_ED_NAME, cv, DBConstants.DATE + " = ? AND "  +
-                DBConstants.INFORMATION + " = ?" , new String[] {date, text });
+                DBConstants.INFORMATION + " = ? AND " + DBConstants.POSITION + " = ?" , new String[] {date, text, pos });
 
     }
 
     public String getInformation(String date, String position) {
-        if (db == null) db = this.getWritableDatabase();
+        if (!db.isOpen()) db = this.getWritableDatabase();
 
         Cursor cursor = db.query(
                 DBConstants.TABLE_ED_NAME,
@@ -99,7 +99,7 @@ public class DBEDHelper extends SQLiteOpenHelper {
     }
 
     public void deleteAllEDInformation() {
-        if (db == null) db = this.getWritableDatabase();
+        if (!db.isOpen()) db = this.getWritableDatabase();
         db.delete(DBConstants.TABLE_ED_NAME, null, null);
 
     }
@@ -109,7 +109,7 @@ public class DBEDHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<OneRandomEvent> getPastInformation() {
-        if (db == null) db = this.getWritableDatabase();
+        if (!db.isOpen()) db = this.getWritableDatabase();
 
         Cursor cursor = db.query(
                 DBConstants.TABLE_ED_NAME,
@@ -130,14 +130,14 @@ public class DBEDHelper extends SQLiteOpenHelper {
         int currentMonth = calendar.get(Calendar.MONTH) + 1; //отсчет месяцев идет с 0
         int currentYear = calendar.get(Calendar.YEAR);
         int sumDate = currentDayOfMonth + currentMonth * 100 + currentYear * 10000;
-        Log.i("past_info", "sumDate today: " + sumDate);
+
         for(int i = 0; i < cursor.getCount(); i++) {
-            Log.i("past_info", "sumDate all days: " + cursor.getInt(cursor.getColumnIndexOrThrow(DBConstants.SUM_DATE)));
+
             if(sumDate > cursor.getInt(cursor.getColumnIndexOrThrow(DBConstants.SUM_DATE))) {
                 String txt = cursor.getString(cursor.getColumnIndexOrThrow(DBConstants.INFORMATION));
                 String date = cursor.getString(cursor.getColumnIndexOrThrow(DBConstants.DATE));
-                int id = cursor.getInt(cursor.getColumnIndexOrThrow(DBConstants.POSITION));
-                listORE.add(new OneRandomEvent(txt, id, date));
+                int pos = cursor.getInt(cursor.getColumnIndexOrThrow(DBConstants.POSITION));
+                listORE.add(new OneRandomEvent(txt, pos, date));
             }
             cursor.moveToNext();
         }
@@ -146,15 +146,16 @@ public class DBEDHelper extends SQLiteOpenHelper {
 
     }
 
-    public void deletePastEvent(String date, String txt) {
-        if (db == null) db = this.getWritableDatabase();
-        db.delete(DBConstants.TABLE_ED_NAME, DBConstants.DATE + " = ? AND " + DBConstants.INFORMATION + " = ?",
-                new String[] {date, txt});
+    public void deletePastEvent(String date, String txt, int id) {
+        if (!db.isOpen()) db = this.getWritableDatabase();
+        db.delete(DBConstants.TABLE_ED_NAME, DBConstants.DATE + " = ? AND " + DBConstants.INFORMATION + " = ? AND " +
+                DBConstants.POSITION + " = ?",
+                new String[] {date, txt, Integer.toString(id)});
 
     }
 
     public String getTodayEndTomorrowEvent(String dateToday, String dateTomorrow, Context context) {
-        if (db == null) db = this.getWritableDatabase();
+        if (!db.isOpen()) db = this.getWritableDatabase();
 
         Cursor cursorToday = db.query(
                 DBConstants.TABLE_ED_NAME,
