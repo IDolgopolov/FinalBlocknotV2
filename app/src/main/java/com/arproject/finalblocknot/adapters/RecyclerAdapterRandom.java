@@ -1,6 +1,7 @@
 package com.arproject.finalblocknot.adapters;
 
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +35,10 @@ public class RecyclerAdapterRandom extends  RecyclerView.Adapter<RecyclerAdapter
             private int ID;
             private String trueText;
 
-        public ViewHolder(RelativeLayout item) {
+        public ViewHolder(CardView item) {
             super(item);
 
-            mItem = item;
+            mItem = (RelativeLayout) item.getChildAt(0);
             textView = (TextView) mItem.getChildAt(0);
             buttonDelete = (ImageButton) mItem.getChildAt(1);
             dateView = (TextView) mItem.getChildAt(2);
@@ -68,8 +69,7 @@ public class RecyclerAdapterRandom extends  RecyclerView.Adapter<RecyclerAdapter
 
     @Override
     public RecyclerAdapterRandom.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RelativeLayout item  = (RelativeLayout) View.inflate(parent.getContext(), R.layout.item_for_recycler_view, null);
-
+        CardView item  = (CardView) View.inflate(parent.getContext(), R.layout.item_for_recycler_view, null);
 
 
         ViewHolder vh = new ViewHolder(item);

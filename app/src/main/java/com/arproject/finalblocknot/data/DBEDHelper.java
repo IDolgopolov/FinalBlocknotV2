@@ -210,5 +210,11 @@ public class DBEDHelper extends SQLiteOpenHelper {
         return infoToday + "\n\n" + context.getString(R.string.tomorrow) + " " + infoTomorrow;
     }
 
+    public void deleteEE(String date, String pos) {
+        if (!db.isOpen()) db = this.getWritableDatabase();
+        db.delete(DBConstants.TABLE_ED_NAME, DBConstants.DATE + " = ? AND "
+                + DBConstants.POSITION + " = ?", new String[] {date, pos});
+    }
+
 
 }

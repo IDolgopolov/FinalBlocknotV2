@@ -20,7 +20,7 @@ public class ItemREDecoration extends RecyclerView.ItemDecoration {
         outRect.left = itemSpaceHorizontal;
 
         if(parent.getChildAdapterPosition(view) == 0) {
-            outRect.top = itemSpaceBottom + 2;
+            outRect.top = itemSpaceBottom;
         }
     }
 }

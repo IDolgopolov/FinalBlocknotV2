@@ -87,36 +87,22 @@ public class MainActivity extends AppCompatActivity  {
 
         fragmentRandomEvents = new RandomEventsFragment();
 
-        final FragmentTransaction fragmentTransaction = sFragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.layout_for_recycler_view, (Fragment) fragmentRandomEvents);
-        fragmentTransaction.commit();
-        generateEEFV2 = true;
+        final FragmentTransaction fT = sFragmentManager.beginTransaction();
+        fT.add(R.id.layout_for_recycler_view, (Fragment) fragmentRandomEvents);
+
+        Bundle args = new Bundle();
+        args.putInt("width", displayWidth);
+        args.putInt("height", displayHeight);
+        fragmentEverydayEvents = new EverydayEventsFragment_v3();
+        fragmentEverydayEvents.setArguments(args);
+        fT.add(R.id.layout_for_everyday_events, (Fragment) fragmentEverydayEvents);
+        fT.commit();
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (generateEEFV2) {
-            final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
-            executor.schedule(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            Bundle args = new Bundle();
-                            args.putInt("width", displayWidth);
-                            args.putInt("height", displayHeight);
-                            FragmentTransaction fT = sFragmentManager.beginTransaction();
-                            fragmentEverydayEvents = new EverydayEventsFragment_v3();
-                            fragmentEverydayEvents.setArguments(args);
-                            fT.add(R.id.layout_for_everyday_events, (Fragment) fragmentEverydayEvents);
-                            fT.commit();
-
-                        }
-                    }, 100, TimeUnit.MILLISECONDS);
-            generateEEFV2 = false;
-
-        }
 
         if(checkFirstLaunch()) {
             generateAlarm(3 * 60 * 60 * 1000, getApplicationContext());
@@ -130,9 +116,6 @@ public class MainActivity extends AppCompatActivity  {
         db.close();
 
         super.onDestroy();
-
-
-
     }
 
     public static void addRandomEventInBD(String txt, String date) {
@@ -227,6 +210,11 @@ public class MainActivity extends AppCompatActivity  {
         } catch(Exception e) {
             Log.e("notification", "error cancel alarm");
         }
+    }
+
+    public static void deleteEE(String date, String pos, Context context) {
+        if (dbED == null) dbED = new DBEDHelper(context);
+        dbED.deleteEE(date, pos);
     }
 
     private boolean checkFirstLaunch() {

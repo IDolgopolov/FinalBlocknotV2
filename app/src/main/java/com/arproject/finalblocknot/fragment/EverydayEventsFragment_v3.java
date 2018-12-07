@@ -1,6 +1,7 @@
 package com.arproject.finalblocknot.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -39,6 +41,10 @@ public class EverydayEventsFragment_v3 extends Fragment {
     private FloatingActionButton buttonPast;
     private int[] arrDateSum = new int[8];
     private FloatingActionButton buttonPickNotification;
+    private ImageButton buttonBackwardsPage, buttonNextPage;
+    private TextView pageNumberView;
+    private int pageNumber = 1;
+    private TextWatcher[] arrayTextWatcher = new TextWatcher[8 * 5];
 
 
 
@@ -50,7 +56,7 @@ public class EverydayEventsFragment_v3 extends Fragment {
         final int heightRow = (int) Math.round(getArguments().getInt("height") * 0.05);
         layoutParent = (LinearLayout) inflater.inflate(R.layout.everyday_fragment_v3, null);
 
-        for (int i = 0; i < layoutParent.getChildCount() - 1; i++) {
+        for (int i = 1; i < layoutParent.getChildCount() - 1; i++) {
             LinearLayout layout = (LinearLayout) layoutParent.getChildAt(i);
             for (int g = 0; g < layout.getChildCount(); g++) {
                 TableLayout tl = (TableLayout) layout.getChildAt(g);
@@ -82,93 +88,155 @@ public class EverydayEventsFragment_v3 extends Fragment {
             }
         }
 
-        buttonDeleteAll = (FloatingActionButton) layoutParent.findViewById(R.id.fab_delete_all);
-        buttonDeleteAll.setOnClickListener(new View.OnClickListener() {
+
+        new Thread(new Runnable() {
             @Override
-            public void onClick(View v) {
-                Log.i("delete_all", "click");
-                EverydayDeleteAllDialog dialog = new EverydayDeleteAllDialog();
-                dialog.show(MainActivity.sFragmentManager, "DELETE_ALL_ED");
+            public void run() {
+                setDate(pageNumber);
+                for (int i = 0; i < arrayEditText.size(); i++) {
 
-            }
-        });
+                    final EditText editText = arrayEditText.get(i);
 
-        buttonPast = (FloatingActionButton) layoutParent.findViewById(R.id.fab_past_everyday);
-        buttonPast.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    PastEverydayDialog dialog = new PastEverydayDialog();
-                    dialog.show(MainActivity.sFragmentManager, "PAST_EVENT");
+                    String id = getResources().getResourceEntryName(editText.getId());
+
+                    final String idPosition = Character.toString(id.charAt(3));
+                    final int tableNumber = Character.getNumericValue(id.charAt(1));
+                    final String date = arrayDateTextView.get(tableNumber).getText().toString();
+                    String information = MainActivity.getEDInformation(date, idPosition);
+
+
+                    if (information != null) editText.setText(information);
+                    final Context context = getContext();
+                    TextWatcher textWatcher = generateTextWatcher(date, idPosition, tableNumber, context, editText);
+                    arrayTextWatcher[i] = textWatcher;
+                    editText.addTextChangedListener(textWatcher);
+
                 }
 
-        });
+                buttonDeleteAll = (FloatingActionButton) layoutParent.findViewById(R.id.fab_delete_all);
+                buttonDeleteAll.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.i("delete_all", "click");
+                        EverydayDeleteAllDialog dialog = new EverydayDeleteAllDialog();
+                        dialog.show(MainActivity.sFragmentManager, "DELETE_ALL_ED");
 
-        buttonPickNotification = (FloatingActionButton) layoutParent.findViewById(R.id.fab_pick_notification);
-        buttonPickNotification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PickNotificationDialog dialog = new PickNotificationDialog();
-                dialog.show(MainActivity.sFragmentManager, "PICK_NOTIFICATION");
-            }
-        });
+                    }
+                });
 
-
-        setDate();
-
-
-        for(int i = 0; i < arrayEditText.size(); i++) {
-
-            final EditText editText =  arrayEditText.get(i);
-
-            String id = getResources().getResourceEntryName(editText.getId());
-
-            final String idPosition = Character.toString(id.charAt(3));
-            final int tableNumber = Character.getNumericValue(id.charAt(1));
-            final String date = arrayDateTextView.get(tableNumber).getText().toString();
-            String information = MainActivity.getEDInformation(date, idPosition);
-
-            if(information != null) editText.setText(information);
-
-
-            editText.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                    if(MainActivity.getEDInformation(date, idPosition) == null) {
-                        if(editText.getText().toString().isEmpty()) return;
-                        Log.i("past_info", "arrSum: " + arrDateSum[tableNumber] + " table pos: " + tableNumber);
-                        MainActivity.addEDInDB(charSequence.toString(), date, idPosition, arrDateSum[tableNumber]);
-                    } else {
-                        MainActivity.updateED(charSequence.toString(), date, idPosition);
+                buttonPast = (FloatingActionButton) layoutParent.findViewById(R.id.fab_past_everyday);
+                buttonPast.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        PastEverydayDialog dialog = new PastEverydayDialog();
+                        dialog.show(MainActivity.sFragmentManager, "PAST_EVENT");
                     }
 
-                }
+                });
 
-                @Override
-                public void afterTextChanged(Editable editable) {
+                buttonPickNotification = (FloatingActionButton) layoutParent.findViewById(R.id.fab_pick_notification);
+                buttonPickNotification.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        PickNotificationDialog dialog = new PickNotificationDialog();
+                        dialog.show(MainActivity.sFragmentManager, "PICK_NOTIFICATION");
+                    }
+                });
 
-                }
-            });
+                pageNumberView = (TextView) layoutParent.findViewById(R.id.view_page_count);
+                pageNumberView.setText(Integer.toString(pageNumber));
+
+                buttonBackwardsPage = (ImageButton) layoutParent.findViewById(R.id.button_backwards);
+                buttonBackwardsPage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pageNumber--;
+                        if(pageNumber < 1) {
+                            pageNumberView.setText(Integer.toString(pageNumber-1));
+                        } else {
+                            pageNumberView.setText(Integer.toString(pageNumber));
+                        }
+                        setDate(pageNumber);
+                        for(int i = 0; i < arrayEditText.size(); i++) {
+                            EditText editText = arrayEditText.get(i);
+                            editText.removeTextChangedListener(arrayTextWatcher[i]);
+                            arrayTextWatcher[i] = null;
+                            String id = getResources().getResourceEntryName(editText.getId());
+
+                            final String idPosition = Character.toString(id.charAt(3));
+                            final int tableNumber = Character.getNumericValue(id.charAt(1));
+                            final String date = arrayDateTextView.get(tableNumber).getText().toString();
+                            String information = MainActivity.getEDInformation(date, idPosition);
+
+                            if (information != null) {
+                                editText.setText(information);
+                            } else {
+                                editText.setText("");
+                            }
+                            final Context context = getContext();
+                            TextWatcher textWatcher = generateTextWatcher(date, idPosition, tableNumber, context, editText);
+                            arrayTextWatcher[i] = textWatcher;
+                            editText.addTextChangedListener(textWatcher);
+                        }
+                    }
+                });
 
 
-        }
+                buttonNextPage = (ImageButton) layoutParent.findViewById(R.id.button_next);
+                buttonNextPage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        pageNumber++;
+                        if(pageNumber < 1) {
+                            pageNumberView.setText(Integer.toString(pageNumber-1));
+                        } else {
+                            pageNumberView.setText(Integer.toString(pageNumber));
+                        }
+                        setDate(pageNumber);
 
+                        for(int i = 0; i < arrayEditText.size(); i++) {
+                            EditText editText = arrayEditText.get(i);
+                            editText.removeTextChangedListener(arrayTextWatcher[i]);
+                            arrayTextWatcher[i] = null;
+
+                            String id = getResources().getResourceEntryName(editText.getId());
+                            final String idPosition = Character.toString(id.charAt(3));
+                            final int tableNumber = Character.getNumericValue(id.charAt(1));
+                            final String date = arrayDateTextView.get(tableNumber).getText().toString();
+                            String information = MainActivity.getEDInformation(date, idPosition);
+
+
+                            if (information != null) {
+                                editText.setText(information);
+                            } else {
+                                editText.setText("");
+                            }
+
+                            final Context context = getContext();
+                            TextWatcher textWatcher = generateTextWatcher(date, idPosition, tableNumber, context, editText);
+                            arrayTextWatcher[i] = textWatcher;
+                            editText.addTextChangedListener(textWatcher);
+                        }
+                    }
+
+                });
+
+            }
+        }).start();
 
         return layoutParent;
     }
 
-    private void setDate() {
+
+    private void setDate(int pageNumberAdd) {
         Calendar calendar = new GregorianCalendar();
+        calendar.add(Calendar.DAY_OF_MONTH, (pageNumberAdd - 1) * 8);
         int maxDayInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         int currentDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         int currentMonth = calendar.get(Calendar.MONTH) + 1; //отсчет месяцев идет с 0
         int currentYear = calendar.get(Calendar.YEAR);
         DateFormat df = new SimpleDateFormat("EEE");
-        String dayOfWeek = df.format(Calendar.getInstance().getTime());
+        String dayOfWeek = df.format(calendar.getTime());
 
         arrDateSum[0] =  currentDayOfMonth + currentMonth*100 + currentYear*10000;
         String dateToday =  dayOfWeek + ", " + Integer.toString(currentDayOfMonth)+  "." + Integer.toString(currentMonth)
@@ -199,6 +267,34 @@ public class EverydayEventsFragment_v3 extends Fragment {
         for(int i = 0; i < arrayEditText.size(); i++) {
             arrayEditText.get(i).setText("");
         }
+    }
+
+    private TextWatcher generateTextWatcher(final String date, final String idPosition,
+                                     final int tableNumber, final Context context, final EditText editText) {
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (MainActivity.getEDInformation(date, idPosition) == null) {
+                    if (editText.getText().toString().isEmpty()) return;
+                    MainActivity.addEDInDB(charSequence.toString(), date, idPosition, arrDateSum[tableNumber]);
+                } else {
+                    if(editText.getText().toString().isEmpty()) MainActivity.deleteEE(date, idPosition, context);
+                    MainActivity.updateED(charSequence.toString(), date, idPosition);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+        return textWatcher;
     }
 
 }

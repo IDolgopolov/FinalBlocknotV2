@@ -1,6 +1,7 @@
 package com.arproject.finalblocknot.adapters;
 
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +25,6 @@ public class RecyclerAdapterPast extends RecyclerView.Adapter<RecyclerAdapterPas
     public RecyclerAdapterPast (ArrayList<OneRandomEvent> list, int option) {
         eventsList = list;
         optionDialog = option;
-        Log.i("past_event", "generate");
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -36,10 +36,10 @@ public class RecyclerAdapterPast extends RecyclerView.Adapter<RecyclerAdapterPas
 
         private String trueText;
 
-        public ViewHolder(RelativeLayout item) {
+        public ViewHolder(CardView item) {
             super(item);
 
-            mItem = item;
+            mItem = (RelativeLayout) item.getChildAt(0);
             textView = (TextView) mItem.getChildAt(0);
             buttonDelete = (ImageButton) mItem.getChildAt(1);
             dateView = (TextView) mItem.getChildAt(2);
@@ -72,7 +72,7 @@ public class RecyclerAdapterPast extends RecyclerView.Adapter<RecyclerAdapterPas
 
     @Override
     public RecyclerAdapterPast.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RelativeLayout item  = (RelativeLayout) View.inflate(parent.getContext(), R.layout.item_for_recycler_view, null);
+        CardView item  = (CardView) View.inflate(parent.getContext(), R.layout.item_for_recycler_view, null);
 
 
 
@@ -101,8 +101,6 @@ public class RecyclerAdapterPast extends RecyclerView.Adapter<RecyclerAdapterPas
     }
 
     public void updateListEvents() {
-        Log.i("past_event", "update list");
             eventsList = MainActivity.dbED.getPastInformation();
-
     }
 }

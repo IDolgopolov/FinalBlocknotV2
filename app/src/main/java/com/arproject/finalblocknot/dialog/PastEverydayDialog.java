@@ -31,7 +31,7 @@ public class PastEverydayDialog extends DialogFragment {
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mRecyclerView.addItemDecoration(new ItemREDecoration(12, 5));
+        mRecyclerView.addItemDecoration(new ItemREDecoration(20, 5));
         adapterEE = new RecyclerAdapterPast(MainActivity.dbED.getPastInformation(), RandomEventsDeleteDialog.OPTION_EVERYDAY);
         mRecyclerView.setAdapter(adapterEE);
 
