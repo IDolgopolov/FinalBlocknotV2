@@ -3,11 +3,11 @@ package com.arproject.finalblocknot.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +56,7 @@ public class EverydayEventsFragment_v3 extends Fragment {
         final int heightRow = (int) Math.round(getArguments().getInt("height") * 0.05);
         layoutParent = (LinearLayout) inflater.inflate(R.layout.everyday_fragment_v3, null);
 
+
         for (int i = 1; i < layoutParent.getChildCount() - 1; i++) {
             LinearLayout layout = (LinearLayout) layoutParent.getChildAt(i);
             for (int g = 0; g < layout.getChildCount(); g++) {
@@ -69,7 +70,7 @@ public class EverydayEventsFragment_v3 extends Fragment {
                     if (d == 0) {
                         arrayDateTextView.add((TextView) row.getChildAt(0));
                     } else {
-                        final TextView tV = (TextView) row.getChildAt(0);
+                         final TextView tV = (TextView) row.getChildAt(0);
                          final EditText eT = (EditText) row.getChildAt(1);
                          arrayEditText.add(eT);
                          tV.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -88,11 +89,20 @@ public class EverydayEventsFragment_v3 extends Fragment {
             }
         }
 
+        return layoutParent;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         new Thread(new Runnable() {
             @Override
             public void run() {
+
                 setDate(pageNumber);
+
+                final Context context = getContext();
                 for (int i = 0; i < arrayEditText.size(); i++) {
 
                     final EditText editText = arrayEditText.get(i);
@@ -102,22 +112,22 @@ public class EverydayEventsFragment_v3 extends Fragment {
                     final String idPosition = Character.toString(id.charAt(3));
                     final int tableNumber = Character.getNumericValue(id.charAt(1));
                     final String date = arrayDateTextView.get(tableNumber).getText().toString();
-                    String information = MainActivity.getEDInformation(date, idPosition);
+                    final String information = MainActivity.getEDInformation(date, idPosition);
 
 
                     if (information != null) editText.setText(information);
-                    final Context context = getContext();
+
                     TextWatcher textWatcher = generateTextWatcher(date, idPosition, tableNumber, context, editText);
                     arrayTextWatcher[i] = textWatcher;
                     editText.addTextChangedListener(textWatcher);
 
                 }
 
+
                 buttonDeleteAll = (FloatingActionButton) layoutParent.findViewById(R.id.fab_delete_all);
                 buttonDeleteAll.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.i("delete_all", "click");
                         EverydayDeleteAllDialog dialog = new EverydayDeleteAllDialog();
                         dialog.show(MainActivity.sFragmentManager, "DELETE_ALL_ED");
 
@@ -216,6 +226,7 @@ public class EverydayEventsFragment_v3 extends Fragment {
                             TextWatcher textWatcher = generateTextWatcher(date, idPosition, tableNumber, context, editText);
                             arrayTextWatcher[i] = textWatcher;
                             editText.addTextChangedListener(textWatcher);
+
                         }
                     }
 
@@ -223,8 +234,7 @@ public class EverydayEventsFragment_v3 extends Fragment {
 
             }
         }).start();
-
-        return layoutParent;
+        MainActivity.progressBar.setVisibility(View.INVISIBLE);
     }
 
 
@@ -283,7 +293,7 @@ public class EverydayEventsFragment_v3 extends Fragment {
                     if (editText.getText().toString().isEmpty()) return;
                     MainActivity.addEDInDB(charSequence.toString(), date, idPosition, arrDateSum[tableNumber]);
                 } else {
-                    if(editText.getText().toString().isEmpty()) MainActivity.deleteEE(date, idPosition, context);
+                    if(editText.getText().toString().equals("")) MainActivity.deleteEE(date, idPosition, context);
                     MainActivity.updateED(charSequence.toString(), date, idPosition);
                 }
 

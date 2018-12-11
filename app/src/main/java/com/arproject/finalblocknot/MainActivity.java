@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -20,7 +21,9 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.arproject.finalblocknot.data.DBEDHelper;
 import com.arproject.finalblocknot.data.DBHelper;
@@ -45,16 +48,17 @@ public class MainActivity extends AppCompatActivity  {
     public final static String TAG_EDITING_EVENT = "dialog_for_editing";
     public final static String TAG_EDITING_PAST = "dialog_for_editing_past";
     public int displayHeight, displayWidth;
-    private boolean generateEEFV2 = false;
+    private boolean generateEEFV3 = false;
     public static final int ALARM_RTC = 0;
     private SharedPreferences sPref;
+    private  FragmentTransaction fT = null;
     private final String APPLICATION_FIRST_LAUNCH = "apllication_launch";
+    public static ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         Display display = getWindowManager().getDefaultDisplay();
@@ -72,22 +76,21 @@ public class MainActivity extends AppCompatActivity  {
 
         db = new DBHelper(getApplicationContext());
         dbED = new DBEDHelper(getApplicationContext());
-        sFragmentManager = getSupportFragmentManager();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(db != null) {
+                if (db != null) {
                     dialogRandomEvents = new RandomEventsDialog();
                     dialogRandomEvents.show(sFragmentManager, TAG_CREATE_EVENT);
                 }
             }
         });
-
+        sFragmentManager = getSupportFragmentManager();
         fragmentRandomEvents = new RandomEventsFragment();
 
-        final FragmentTransaction fT = sFragmentManager.beginTransaction();
+        fT = sFragmentManager.beginTransaction();
         fT.add(R.id.layout_for_recycler_view, (Fragment) fragmentRandomEvents);
 
         Bundle args = new Bundle();
@@ -95,20 +98,41 @@ public class MainActivity extends AppCompatActivity  {
         args.putInt("height", displayHeight);
         fragmentEverydayEvents = new EverydayEventsFragment_v3();
         fragmentEverydayEvents.setArguments(args);
-        fT.add(R.id.layout_for_everyday_events, (Fragment) fragmentEverydayEvents);
         fT.commit();
+
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        progressBar.setVisibility(ProgressBar.VISIBLE);
+
+        generateEEFV3 = true;
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        if(generateEEFV3) {
+
+            new Handler().postDelayed( new Runnable() {
+                @Override
+                public void run() {
+                    fT = sFragmentManager.beginTransaction();
+                    fT.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    fT.addToBackStack(null);
+                    fT.replace(R.id.layout_for_everyday_events, (Fragment) fragmentEverydayEvents);
+                    fT.commit();
+
+                }
+            }, 50);
+            generateEEFV3 = false;
+
+        }
+
 
         if(checkFirstLaunch()) {
             generateAlarm(3 * 60 * 60 * 1000, getApplicationContext());
         }
 
-    }
+        }
 
     @Override
     protected void onDestroy() {
@@ -169,26 +193,31 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public static String getTodayAndTomorrowEE(String dateToday, String dateTomorrow, Context context) {
+        try {
         if (dbED == null) dbED = new DBEDHelper(context);
+        } catch(Exception e) {
+                 Toast.makeText(context, "Код: 5   " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+         }
         return dbED.getTodayEndTomorrowEvent(dateToday, dateTomorrow, context);
     }
 
     public static void generateAlarm(int hour, int min, long interval,  Context context) {
-        Log.i("check_not", "alarm hour generate" );
+
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         deleteAllAlarm(context);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, hour, min);
-        Log.i("notification", "generate alarm");
+
         Intent intent = new Intent(context, MyAlarmManager.class);
         PendingIntent pendingIntent =  PendingIntent.getBroadcast(context, ALARM_RTC, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         manager.setRepeating(AlarmManager.RTC_WAKEUP, GregorianCalendar.getInstance().getTimeInMillis(), interval, pendingIntent);
+
     }
     public static void generateAlarm(long interval,  Context context) {
-        Log.i("check_not", "alarm millis generate" );
+
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         deleteAllAlarm(context);
 
@@ -199,17 +228,15 @@ public class MainActivity extends AppCompatActivity  {
         PendingIntent pendingIntent =  PendingIntent.getBroadcast(context, ALARM_RTC, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         manager.setRepeating(AlarmManager.RTC_WAKEUP, GregorianCalendar.getInstance().getTimeInMillis(), interval, pendingIntent);
+
     }
     public static void deleteAllAlarm(Context context) {
-        try {
             AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(context, MyAlarmManager.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, ALARM_RTC, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             manager.cancel(pendingIntent);
             pendingIntent.cancel();
-        } catch(Exception e) {
-            Log.e("notification", "error cancel alarm");
-        }
+
     }
 
     public static void deleteEE(String date, String pos, Context context) {

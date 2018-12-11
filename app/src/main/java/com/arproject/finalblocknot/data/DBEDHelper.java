@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.arproject.finalblocknot.MainActivity;
 import com.arproject.finalblocknot.OneRandomEvent;
@@ -155,60 +156,64 @@ public class DBEDHelper extends SQLiteOpenHelper {
     }
 
     public String getTodayEndTomorrowEvent(String dateToday, String dateTomorrow, Context context) {
-        if (!db.isOpen()) db = this.getWritableDatabase();
-
-        Cursor cursorToday = db.query(
-                DBConstants.TABLE_ED_NAME,
-                new String[] { DBConstants.DATE, DBConstants.INFORMATION},
-                DBConstants.DATE + " = ?", new String[] {dateToday},
-                null, null, null);
-
-        if (cursorToday != null) {
-            cursorToday.moveToFirst();
-        } else {
-            Log.e("DB", "error generate cursor");
-        }
         String infoToday = "";
-        for(int i = 0; i < cursorToday.getCount(); i++) {
-                if(cursorToday.isLast()) {
-                    infoToday+= cursorToday.getString(cursorToday.getColumnIndexOrThrow(DBConstants.INFORMATION));
-                } else {
-                    infoToday+= cursorToday.getString(cursorToday.getColumnIndexOrThrow(DBConstants.INFORMATION)) + ", ";
-                }
-            cursorToday.moveToNext();
-        }
-
-        if(infoToday.equals("")) infoToday = context.getResources().getString(R.string.no_events_today);
-        cursorToday.close();
-
         String infoTomorrow = "";
-        Cursor cursorTomorrow = db.query(
-                DBConstants.TABLE_ED_NAME,
-                new String[] { DBConstants.DATE, DBConstants.INFORMATION},
-                DBConstants.DATE + " = ?", new String[] {dateTomorrow},
-                null, null, null);
 
-        if (cursorTomorrow != null) {
-            cursorTomorrow.moveToFirst();
-        } else {
-            Log.e("DB", "error generate cursor");
-        }
 
-        for(int i = 0; i < cursorTomorrow.getCount(); i++) {
-            if(cursorTomorrow.isLast()) {
-                infoTomorrow+= cursorTomorrow.getString(cursorTomorrow.getColumnIndexOrThrow(DBConstants.INFORMATION));
+
+            if (!db.isOpen()) db = this.getWritableDatabase();
+
+            Cursor cursorToday = db.query(
+                    DBConstants.TABLE_ED_NAME,
+                    new String[]{DBConstants.DATE, DBConstants.INFORMATION},
+                    DBConstants.DATE + " = ?", new String[]{dateToday},
+                    null, null, null);
+
+            if (cursorToday != null) {
+                cursorToday.moveToFirst();
             } else {
-                infoTomorrow+= cursorTomorrow.getString(cursorTomorrow.getColumnIndexOrThrow(DBConstants.INFORMATION)) + ", ";
+                Log.e("DB", "error generate cursor");
             }
-            cursorTomorrow.moveToNext();
+
+            for (int i = 0; i < cursorToday.getCount(); i++) {
+                if (cursorToday.isLast()) {
+                    infoToday += cursorToday.getString(cursorToday.getColumnIndexOrThrow(DBConstants.INFORMATION));
+                } else {
+                    infoToday += cursorToday.getString(cursorToday.getColumnIndexOrThrow(DBConstants.INFORMATION)) + ", ";
+                }
+                cursorToday.moveToNext();
+            }
+
+            if (infoToday.equals(""))
+                infoToday = context.getResources().getString(R.string.no_events_today);
+            cursorToday.close();
+
+            Cursor cursorTomorrow = db.query(
+                    DBConstants.TABLE_ED_NAME,
+                    new String[]{DBConstants.DATE, DBConstants.INFORMATION},
+                    DBConstants.DATE + " = ?", new String[]{dateTomorrow},
+                    null, null, null);
+
+            if (cursorTomorrow != null) {
+                cursorTomorrow.moveToFirst();
+            } else {
+                Log.e("DB", "error generate cursor");
+            }
+
+            for (int i = 0; i < cursorTomorrow.getCount(); i++) {
+                if (cursorTomorrow.isLast()) {
+                    infoTomorrow += cursorTomorrow.getString(cursorTomorrow.getColumnIndexOrThrow(DBConstants.INFORMATION));
+                } else {
+                    infoTomorrow += cursorTomorrow.getString(cursorTomorrow.getColumnIndexOrThrow(DBConstants.INFORMATION)) + ", ";
+                }
+                cursorTomorrow.moveToNext();
+            }
+            if (infoTomorrow.equals(""))
+                infoTomorrow = context.getResources().getString(R.string.no_events_today);
+            cursorTomorrow.close();
+
+            return infoToday + "\n\n" + context.getString(R.string.tomorrow) + " " + infoTomorrow;
         }
-        if(infoTomorrow.equals("")) infoTomorrow = context.getResources().getString(R.string.no_events_today);
-        cursorTomorrow.close();
-        Log.i("notification", dateTomorrow);
-
-
-        return infoToday + "\n\n" + context.getString(R.string.tomorrow) + " " + infoTomorrow;
-    }
 
     public void deleteEE(String date, String pos) {
         if (!db.isOpen()) db = this.getWritableDatabase();

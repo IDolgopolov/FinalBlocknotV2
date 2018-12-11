@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,13 +25,11 @@ public class MyAlarmManager extends BroadcastReceiver {
     @Override
     @SuppressLint("NewAPi")
     public void onReceive(Context context, Intent intent) {
-
         Intent intentActivity = new Intent(context, MainActivity.class);
         intentActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, MainActivity.ALARM_RTC, intentActivity, PendingIntent.FLAG_UPDATE_CURRENT);
-
 
         String txt = MainActivity.getTodayAndTomorrowEE(getTodayDate(), getTomorrowDate(), context);
         NotificationManager notManager = ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE));

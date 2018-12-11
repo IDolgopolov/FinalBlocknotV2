@@ -9,6 +9,11 @@
     tools:context=".MainActivity"
 
     >
+    <ProgressBar
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress_bar"/>
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/layout_for_everyday_events"
         android:layout_width="match_parent"
