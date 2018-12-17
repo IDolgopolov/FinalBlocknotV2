@@ -2,6 +2,7 @@ package com.arproject.finalblocknot.fragment;
 
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -53,10 +55,10 @@ public class EverydayEventsFragment_v3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         final int widthTl = (int) Math.round(getArguments().getInt("width") * 0.46);
-        final int heightRow = (int) Math.round(getArguments().getInt("height") * 0.05);
+        final int heightRow = (int) Math.round(getArguments().getInt("height") * 0.06);
         layoutParent = (LinearLayout) inflater.inflate(R.layout.everyday_fragment_v3, null);
 
-
+        if(arrayEditText.size() != 0) arrayEditText.clear();
         for (int i = 1; i < layoutParent.getChildCount() - 1; i++) {
             LinearLayout layout = (LinearLayout) layoutParent.getChildAt(i);
             for (int g = 0; g < layout.getChildCount(); g++) {
@@ -88,14 +90,6 @@ public class EverydayEventsFragment_v3 extends Fragment {
                 }
             }
         }
-
-        return layoutParent;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -160,35 +154,37 @@ public class EverydayEventsFragment_v3 extends Fragment {
                 buttonBackwardsPage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        pageNumber--;
-                        if(pageNumber < 1) {
-                            pageNumberView.setText(Integer.toString(pageNumber-1));
-                        } else {
-                            pageNumberView.setText(Integer.toString(pageNumber));
-                        }
-                        setDate(pageNumber);
-                        for(int i = 0; i < arrayEditText.size(); i++) {
-                            EditText editText = arrayEditText.get(i);
-                            editText.removeTextChangedListener(arrayTextWatcher[i]);
-                            arrayTextWatcher[i] = null;
-                            String id = getResources().getResourceEntryName(editText.getId());
-
-                            final String idPosition = Character.toString(id.charAt(3));
-                            final int tableNumber = Character.getNumericValue(id.charAt(1));
-                            final String date = arrayDateTextView.get(tableNumber).getText().toString();
-                            String information = MainActivity.getEDInformation(date, idPosition);
-
-                            if (information != null) {
-                                editText.setText(information);
+                        try {
+                            pageNumber--;
+                            if (pageNumber < 1) {
+                                pageNumberView.setText(Integer.toString(pageNumber - 1));
                             } else {
-                                editText.setText("");
+                                pageNumberView.setText(Integer.toString(pageNumber));
                             }
-                            final Context context = getContext();
-                            TextWatcher textWatcher = generateTextWatcher(date, idPosition, tableNumber, context, editText);
-                            arrayTextWatcher[i] = textWatcher;
-                            editText.addTextChangedListener(textWatcher);
+                            setDate(pageNumber);
+                            for (int i = 0; i < arrayEditText.size(); i++) {
+                                EditText editText = arrayEditText.get(i);
+                                editText.removeTextChangedListener(arrayTextWatcher[i]);
+                                arrayTextWatcher[i] = null;
+                                String id = getResources().getResourceEntryName(editText.getId());
+
+                                final String idPosition = Character.toString(id.charAt(3));
+                                final int tableNumber = Character.getNumericValue(id.charAt(1));
+                                final String date = arrayDateTextView.get(tableNumber).getText().toString();
+                                String information = MainActivity.getEDInformation(date, idPosition);
+
+                                if (information != null) {
+                                    editText.setText(information);
+                                } else {
+                                    editText.setText("");
+                                }
+                                final Context context = getContext();
+                                TextWatcher textWatcher = generateTextWatcher(date, idPosition, tableNumber, context, editText);
+                                arrayTextWatcher[i] = textWatcher;
+                                editText.addTextChangedListener(textWatcher);
+                            }
+                        }catch(Exception e) { }
                         }
-                    }
                 });
 
 
@@ -196,6 +192,7 @@ public class EverydayEventsFragment_v3 extends Fragment {
                 buttonNextPage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        try {
                         pageNumber++;
                         if(pageNumber < 1) {
                             pageNumberView.setText(Integer.toString(pageNumber-1));
@@ -228,14 +225,18 @@ public class EverydayEventsFragment_v3 extends Fragment {
                             editText.addTextChangedListener(textWatcher);
 
                         }
+                        }catch(Exception e) { }
                     }
 
                 });
 
             }
         }).start();
-        MainActivity.progressBar.setVisibility(View.INVISIBLE);
+
+
+        return layoutParent;
     }
+
 
 
     private void setDate(int pageNumberAdd) {

@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity  {
     public final static String TAG_EDITING_EVENT = "dialog_for_editing";
     public final static String TAG_EDITING_PAST = "dialog_for_editing_past";
     public int displayHeight, displayWidth;
-    private boolean generateEEFV3 = false;
+
     public static final int ALARM_RTC = 0;
     private SharedPreferences sPref;
     private  FragmentTransaction fT = null;
@@ -98,34 +98,15 @@ public class MainActivity extends AppCompatActivity  {
         args.putInt("height", displayHeight);
         fragmentEverydayEvents = new EverydayEventsFragment_v3();
         fragmentEverydayEvents.setArguments(args);
+        fT.add(R.id.layout_for_everyday_events, (Fragment) fragmentEverydayEvents);
         fT.commit();
 
-        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        progressBar.setVisibility(ProgressBar.VISIBLE);
-
-        generateEEFV3 = true;
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(generateEEFV3) {
-
-            new Handler().postDelayed( new Runnable() {
-                @Override
-                public void run() {
-                    fT = sFragmentManager.beginTransaction();
-                    fT.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                    fT.addToBackStack(null);
-                    fT.replace(R.id.layout_for_everyday_events, (Fragment) fragmentEverydayEvents);
-                    fT.commit();
-
-                }
-            }, 50);
-            generateEEFV3 = false;
-
-        }
 
 
         if(checkFirstLaunch()) {
@@ -138,6 +119,7 @@ public class MainActivity extends AppCompatActivity  {
     protected void onDestroy() {
         dbED.close();
         db.close();
+
 
         super.onDestroy();
     }

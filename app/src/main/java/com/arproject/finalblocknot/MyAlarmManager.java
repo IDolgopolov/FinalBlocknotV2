@@ -23,7 +23,6 @@ public class MyAlarmManager extends BroadcastReceiver {
     private final String nameChannel = "events_notification";
 
     @Override
-    @SuppressLint("NewAPi")
     public void onReceive(Context context, Intent intent) {
         Intent intentActivity = new Intent(context, MainActivity.class);
         intentActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -35,8 +34,8 @@ public class MyAlarmManager extends BroadcastReceiver {
         NotificationManager notManager = ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE));
 
         Notification notification;
-        if(Build.VERSION.SDK_INT > 24) {
-             notification = new Notification.Builder(context)
+        if(Build.VERSION.SDK_INT > 26) {
+             notification = new Notification.Builder(context, idChannel)
                     .setColor(context.getResources().getColor(R.color.colorAccent))
                     .setContentTitle(context.getResources().getString(R.string.today) + ": ")
                     .setSmallIcon(R.drawable.icon_small)

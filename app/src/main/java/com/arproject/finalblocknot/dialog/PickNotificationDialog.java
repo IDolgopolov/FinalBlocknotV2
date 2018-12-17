@@ -54,6 +54,7 @@ public class PickNotificationDialog extends DialogFragment {
             int hour = 0;
             if(result.equals(arr[0])) {
                 millis = 0;
+                hour = 0;
             } else if(result.equals(arr[1])) {
                 millis = 2 *60 * 60 * 1000;
             } else if(result.equals(arr[2])) {

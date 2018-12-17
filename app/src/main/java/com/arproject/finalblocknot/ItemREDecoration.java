@@ -8,9 +8,11 @@ public class ItemREDecoration extends RecyclerView.ItemDecoration {
     private final int itemSpaceBottom;
     private final int itemSpaceHorizontal;
 
+
     public ItemREDecoration(int spaceBottom, int spaceHorizontal) {
         itemSpaceBottom = spaceBottom;
         itemSpaceHorizontal = spaceHorizontal;
+
     }
 
     @Override
@@ -19,8 +21,9 @@ public class ItemREDecoration extends RecyclerView.ItemDecoration {
         outRect.right = itemSpaceHorizontal;
         outRect.left = itemSpaceHorizontal;
 
+
         if(parent.getChildAdapterPosition(view) == 0) {
-            outRect.top = itemSpaceBottom;
+            outRect.top = itemSpaceBottom - 1;
         }
     }
 }

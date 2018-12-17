@@ -9,11 +9,7 @@
     tools:context=".MainActivity"
 
     >
-    <ProgressBar
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/progress_bar"/>
+
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/layout_for_everyday_events"
         android:layout_width="match_parent"
@@ -33,19 +29,20 @@
         android:id="@+id/coordinator_layout"
         tools:context=".MainActivity"
         >
-
-        <include layout="@layout/coordinator_layout"/>
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_anchor="@+id/layout_for_recycler_view"
+            app:layout_anchor="@+id/up_linear"
             app:layout_anchorGravity="top|end"
             app:behavior_autoHide="false"
+
             android:layout_marginEnd="60dp"
             app:srcCompat="@android:drawable/ic_menu_edit"
             app:backgroundTint="#b8be0e"
             />
+
+        <include layout="@layout/coordinator_layout"/>
 
     </android.support.design.widget.CoordinatorLayout>
 
